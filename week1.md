@@ -66,7 +66,8 @@ span = 인라인요소에서 아무 의미를 가지지 않는요소
 ## 짝지어다니는 요소들
 위에 나오는 블록요소와 인라인요소들처럼 개별적으로 사용되는것들도 있지만 웹 표준상 무조건 함께 사용되어야하는 태그들이 몇가지 있습니다.
 - form + input
-- ul + li, ol, dl
+- ul + li,
+- ol + li
 - table + tr, td, th
 - select + option
 
@@ -82,14 +83,14 @@ span = 인라인요소에서 아무 의미를 가지지 않는요소
 <!-- ================= -->
 
 <ul>
-    <li></li>
+    <li>순서가 정해지지않은 목록</li>
 </ul>
 
 <!-- ================= -->
 
-<ul>
-    <ol></ol>
-</ul>
+<ol>
+    <li>순서가 있는 목록</li>
+</ol>
 
 <!-- ================= -->
 
@@ -137,3 +138,9 @@ a 태그는 링크의 역할을하며 href 에 주소입력으로 클릭시 원�
 
 
 ### 구조짜기
+![sample1](https://github.com/kangyongseok/webtutorial/blob/main/img/sample1.png?raw=true)
+![sample2](https://github.com/kangyongseok/webtutorial/blob/main/img/sample2.png?raw=true)
+![sample3](https://github.com/kangyongseok/webtutorial/blob/main/img/sample3.png?raw=true)
+![sample4](https://github.com/kangyongseok/webtutorial/blob/main/img/sample4.png?raw=true)
+
+
