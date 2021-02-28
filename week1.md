@@ -137,10 +137,47 @@ a 태그는 링크의 역할을하며 href 에 주소입력으로 클릭시 원�
 - _blank: 새탭띄우기
 
 
+## 부모요소와 자식요소
+html 에서 각 요소들은 부모요소와 자식요소들을 가지게 될수도있는데 이는 상대적으로 판단할 수 있다.
+
+```html
+<div>
+    <p></p>
+</div>
+```
+
+위의 코드에서 div 는 p 의 부모요소이고 p는 div 의 자식요소가 된다. 부모와 자식의 관계 그리고 형제관계는 css 할때 매우 중요하게 다뤄지므로 그 관계를 잘 이해하고 있어야 한다.
+
+```html
+<div>
+    <p></p>
+    <p></p>
+    <div></div>
+</div>
+```
+
+위와같이 같은 블록태그 끼리라면 얼마든지 서로간에 자식요소와 부모요소로 사용될 수 있다.
+
+```html
+<!-- 사용하면 안될 패턴 -->
+<span>
+    <div></div>
+</span>
+```
+위와같은 경우는 인라인요소인 span 내부에 블록요소인 div를 넣은 경우인데 이는 웹표준에서 위반되는 방식이라 사용하면 안될 패턴이다. 물론 저대로 동작은 하지만 유지보수 측면이나 레이아웃을 짤때 여러가지 문제를 일으키는 원인이 되기도 한다.
+
+
+
+
 ### 구조짜기
 ![sample1](https://github.com/kangyongseok/webtutorial/blob/main/img/sample1.png?raw=true)
 ![sample2](https://github.com/kangyongseok/webtutorial/blob/main/img/sample2.png?raw=true)
 ![sample3](https://github.com/kangyongseok/webtutorial/blob/main/img/sample3.png?raw=true)
 ![sample4](https://github.com/kangyongseok/webtutorial/blob/main/img/sample4.png?raw=true)
+
+## 웹표준 검사
+[웹 표준 검사](https://validator.kldp.org/)
+
+만약 내가 짜고있는 마크업과 구조가 제대로 된것인지 의심스럽다면 웹표준검사를 통해서 확인할 수 있다. 해당검사는 위와같은 인라인요소 내에 블록요소를 사용했거나 해당 요소에서 필수적으로 넣어야하는 속성이 빠져있거나 까먹고 닫지않은 태그가 있거나 하는 부분들을 체크해서 알려준다.
 
 
