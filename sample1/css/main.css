@@ -1,0 +1,242 @@
+* {
+    /* 모든 태그 영역에 적용 */
+    margin: 0;
+    padding: 0;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+}
+
+html,
+body {
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    /* ul 이 가진 리스트 속성 스타일 제거 */
+    list-style: none;
+}
+
+a {
+    /* a 링크태그가 가진 텍스트 꾸밈 제거 */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 90px;
+    /* background: red; */
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    position: relative;
+}
+
+.header .logo {
+    font-size: 3em;
+    font-weight: 400;
+    position: absolute;
+    left: 50%;
+    margin-left: -70px;
+    top: 30px;
+    /* background: blue; */
+}
+
+.social_area {
+    /* background: yellow; */
+}
+
+.utils_area {
+    /* background: yellowgreen; */
+}
+
+.social_area ul,
+.utils_area ul {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+    /* background: lightsalmon; */
+}
+
+.social_area ul li a {
+    padding: 10px;
+    /* background: palegreen; */
+}
+
+.social_area ul li a i {
+    font-size: 1.5em;
+}
+
+.utils_area ul li a {
+    font-size: 1.2em;
+    padding: 10px;
+    /* background: palegreen; */
+}
+
+.nav_area {
+    width: 100%;
+    height: 55px;
+    /* background: green; */
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.nav_area .nav {
+    width: 100%;
+}
+
+.nav_area ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    /* background: #eeeeee; */
+}
+
+.nav_area ul a {
+    font-size: 1.2em;
+    /* background: pink; */
+    padding: 10px;
+}
+
+.slide_banner {
+    width: 100%;
+    height: 750px;
+}
+
+.contents_area {
+    /* background: black; */
+    padding: 0 50px;
+}
+
+.contents_area .card_banner {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+.contents_area .card_banner .card {
+    margin-right: 10px;
+}
+
+.contents_area .card_banner .card:last-child {
+    margin-right: 0;
+}
+
+.weekly_best {
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
+}
+
+.weekly_best section h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.items_area {
+    /* background: hotpink; */
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.items_area img {
+    height: auto;
+}
+
+.items_area .item_box {
+    margin-right: 20px;
+}
+
+.items_area .item_box:last-child {
+    margin-right: 0;
+}
+
+.items_area .item_box .item_title {
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.items_area .item_box p{
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+.items_area .item_box span {
+    font-size: 1em;
+}
+
+.footer {
+    width: 100%;
+    /* background: darkcyan; */
+}
+
+.footer .company_info {
+    padding: 0 50px;
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #949494;
+}
+
+.footer .company_info p {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.footer .company_info address,
+.footer .company_info a {
+    font-size: 13px;
+    text-align: center;
+}
+
+.footer .footer_menu {
+    width: 100%;
+    height: 42px;
+    border-top: 1px solid #c7c7c7;
+    border-bottom: 1px solid #c7c7c7;
+    margin: 50px 0;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+}
+
+.footer .footer_menu ul {
+    width: 50%;
+    margin: 0 auto;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+}
+.footer .footer_menu ul li {
+    font-size: 1.4em;
+}
