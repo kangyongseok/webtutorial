@@ -1,0 +1,18 @@
+div {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation-name: move; /* 애니메이션 키프레임 이름 */
+    animation-duration: 5s; /* 5초에 걸쳐서 움직임 */
+    animation-iteration-count: infinite; /* 무한동작 */
+}
+
+@keyframes move { /* 지정한 이름으로 키프레임 생성 */
+    from { /* 어디서부터 시작할건지 지정 */
+        left: 0;
+    }
+    to { /* 어디까지 움직일지 마지막 지점 */
+        left: 300px;
+    }
+}
