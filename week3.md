@@ -76,4 +76,22 @@ div {
   
 그러나 아직 약간 부자연스럽습니다. 왼쪽 0px 부터 300px 까지 이동은했지만 다시 돌아오는 애니메이션이 없기때문에 끊어지는것처럼 보입니다. 이럴떈 퍼센트를 활용할 수 있습니다.
 
+```css
+@keyframes move { /* 지정한 이름으로 키프레임 생성 */
+    0% {
+        left: 0;
+    }
+
+    50% {
+        left: 300px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+```
+
 [애니메이션 예제2](https://kangyongseok.github.io/webtutorial/CSS%20예제/AnimationStyle/returnAnimation.html)
+
+이렇게 퍼센트를 활용하면 왕복움직임을 자연스럽게 만들 수 있습니다. 해당 비율을 나누면 좀더 디테일한 애니메이션동작 구현도 가능합니다.
