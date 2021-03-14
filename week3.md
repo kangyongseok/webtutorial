@@ -49,6 +49,34 @@ css 로는 스타일을 정해주는것과 레이아웃 잡는것 이외에도 �
 이렇게 최소한 동급 우선순위로 작성해줘야지만 속성을 정상적으로 적용할 수 있습니다.  
 [반응형 미디어쿼리 안내서 MDN](https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/Media_queries)
 
+
+### 모바일 우선 미디어쿼리 사용
+```css
+/*==========  Mobile First Method  ==========*/
+/* All Device */
+
+/* Custom, iPhone Retina : 320px ~ */
+@media only screen and (min-width : 320px) {
+
+}
+/* Extra Small Devices, Phones : 480px ~ */
+@media only screen and (min-width : 480px) {
+
+}
+/* Small Devices, Tablets : 768px ~ */
+@media only screen and (min-width : 768px) {
+
+}
+/* Medium Devices, Desktops : 992px ~ */
+@media only screen and (min-width : 992px) {
+
+}
+/* Large Devices, Wide Screens : 1200px ~ */
+@media only screen and (min-width : 1200px) {
+
+}
+```
+
 ## 애니메이션
 css 속성중 animation 을 사용하면 좀더 인터렉티브한 화면을 구성할 수 있습니다.
 
