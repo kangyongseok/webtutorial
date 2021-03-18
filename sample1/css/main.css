@@ -58,6 +58,9 @@ a {
     left: 50%;
     margin-left: -70px;
     top: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
     /* background: blue; */
 }
 

@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    background: red;
+}
+
+.utils_area {
+    background: yellow;
+    height: 39px;
+}
+
+.utils_area ul {
+    float: right;
+    height: 100%;
+}
+
+.utils_area ul li {
+    float: left;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.utils_area ul li a {
+    background: green;
+    color: white;
+    padding: 10px;
+}
+
+.menu_area {
+    width: 100%;
+    background: pink;
+    height: 50px;
+}
+
+.menu_area .logo {
+    float: left;
+}
+
+.menu_area .menu {
+    float: left;
+}
+
+.menu_area .menu li {
+    float: left;
+}
+
+.menu_area .menu_contents {
+    float: right;
+}
+
+.banner_group {
+    position: relative;
+}
+
+.banner_group button {
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.banner_group button:hover {
+    color: pink;
+}
+
+.banner_group .detail {
+    bottom: 50px;
+}
+
+.window_banner {
+    width: 100%;
+    background: green;
+}
+
+.window_banner .bannner {
+    width: 48%;
+    height: 300px;
+    float: left;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.favorit_product {
+    clear: both;
+}
+
+.window_banner .bannner button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    padding: 10px 30px;
+}
+
+.banner_wrap {
+    margin: 0 2%;
+}

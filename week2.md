@@ -267,3 +267,49 @@ p {
 그리고 드디어 레이아웃을 위한 전용 속성이 등장합니다 바로 css grid 와 flex box 스타일 입니다. 다만 일부 브라우저에서는 지원하지않거나 폴리필을 사용하거나 prefix(접두사) 를 사용해야합니다.
   
 이번 클래스에서는 float, position, flex 를 비교하며 사용해보려고합니다.
+
+## float
+`float` 은 웹 페이지에서 레이아웃을 잡을때 가장 많이 보편적으로 사용하던 방식입니다. `float` 이전에는 `<table></table>` 태그를 활용하여 레이아웃을 잡았었는데 단점은 유연하지않다는것이고 코드의 가독성이 매우 나쁘다는겁니다. table 하나를 사용하려면 `thead, tbody, tr, th, td` 이 태그들이 같이 사용되야하기때문에 라인수가 길어집니다.
+  
+```css
+div {
+    float: left;
+}
+```
+float 는 이렇게 css 속성 한줄이면 해당 컨텐츠를 왼쪽에 두고 다음 블록요소를 오른쪽에 붙도록 위치시킬 수 있습니다.
+  
+float 은 레이아웃을 잡기위한 속성은 아니고 어떤 컨텐츠를 텍스트로 감싼형태로 쓰기위해서 나온 속성이었습니다.   
+[float layout example](https://kangyongseok.github.io/webtutorial/CSS%20예제/FloatLayout/index.html)
+  
+해당 예제에서 `clear: both` 의 유무에 따라 레이아웃에 변경이 발생하는걸 볼 수 있습니다. 일단 부모영역은 자식에서 flaot 을 사용한다면 높이를 잡아주지않으면 컨텐츠영역이 사라집니다.
+
+
+## flex
+
+## positon
+```css
+div {
+    position: relative;
+    position: absolute;
+    position: fixed;
+    position: sticky;
+    z-index: 1~9999;
+}
+```
+포지션속성은 float 과 비슷하게 띄운다 라는 개념이긴하지만 큰 차이가 있습니다. 바로 `z축` 의 존재여부입니다. float 은 사용해도 다른 컨텐츠와 겹치거나 영역자체를 벗어나지는 않습니다. 그러나 postion 은 따로 지정하지않는이상 부모는 body 가 되며 컨텐츠끼리의 겹침현상이 발생합니다. 위치를 잡는것또한 margin, padding 이 아닌
+>left, right, top, bottom
+
+을 사용해서 간격을 주거나 위치를 잡아줍니다. 그리고 또 다른점은 float 은 다른 컨테츠에 의해서 위치나 사이즈에 영향을 받지만 position 은 독자적으로 움직일 수 있습니다.
+
+><span style="color: red">주의 </span> 흔히 하는 오해중에 position 의 부모는 relative 로 지정해준다 라고 아는경우가많은데 부모영역어딘가에 position 이 작성되어있다면 그걸 부모로 인식합니다. 즉 relative 던 absolute 던 flex 이던 상관없다는 소리입니다.
+
+### relative
+relative 는 자기 자신을 기준으로 움직입니다. 바로 이 특성때문에 relative 를 선언해서 부모로 잡아준다라는 오해가 발생합니다. 
+
+### absolute
+absolute 는 부모의 영역을 기준으로 움직입니다. 상위에 position 선언된것이 없다면 body, position 이 선언되었다면 그 영역내에서 움직입니다.
+
+### fiexd
+fixed 는 원하는 해당 위치에 고정할 수 있습니다. 그 위치의 기준은 사용자가 보는 화면기준이고 컨텐츠영역 기준이 아닙니다. 
+
+### sticky
