@@ -1,0 +1,180 @@
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom; /* 이미지 하단에 생기는 간격 제거 */
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+
+
+.wrap {
+    width: 100%;
+    height: auto; /* 내부 컨텐츠만큼 높이 잡아 주기위함 */
+    background: #575757;
+}
+
+.header_area {
+    width: 100%;
+    height: 56px;
+    padding: 0 15px;
+    background: #444444;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo_area,
+.search_area,
+.utils ul {
+    display: flex;
+    align-items: center;
+}
+
+.logo_area button {
+    margin-right: 10px;
+}
+
+
+.search_area {
+    width: 50%;
+    height: 30px;
+}
+
+.search_area form,
+.search_area input,
+.search_area button {
+    height: 100%;
+}
+
+.search_area form {
+    width: 100%;
+    display: flex;
+}
+
+.search_area input {
+    width: calc(100% - 50px);
+}
+
+.search_area button {
+    width: 50px;
+    background: #333333;
+    color: white;
+}
+
+.search_area .microphone {
+    margin-left: 10px;
+}
+
+.utils li {
+    padding: 10px;
+    margin-left: 5px;
+    color: white;
+}
+
+.contents_area {
+    display: flex;
+    width: 100%;
+}
+
+.contents_area .menu_area {
+    background: #333333;
+    min-width: 240px;
+    height: calc(100vh - 50px);
+}
+
+.contents_area .menu_area .menu_group {
+    border-bottom: 1px solid #444444;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+
+.contents_area .menu_area .menu_group li {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.contents_area .menu_area .menu_group li:hover {
+    background: #666666 ;
+}
+
+.contents_area .menu_area .menu_group:first-child li:first-child {
+    background: #666666 ;
+    color: white;
+}
+
+.contents_area .menu_area .menu_group li p:first-child {
+    width: 40px;
+    font-size: 20px;
+}
+
+.contents_area .menu_area .menu_group li p {
+    color: #cccccc;
+}
+
+.contents_area .menu_area .follow li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-right: 20px;
+}
+
+.contents_area .menu_area .follow h3 {
+    font-size: 14px;
+    color: #888888;
+    margin: 10px;
+}
+
+
+.video_area {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: auto;
+}
+
+.video_area .content {
+    width: 23%;
+    height: 280px;
+    margin: 10px;
+    margin-bottom: 40px;
+}
+
+.video_area .content img {
+    display: block;
+    height: 200px;
+}
+
+.video_area .content p {
+    margin-top: 10px;
+    color: white;
+}
