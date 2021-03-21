@@ -10,3 +10,15 @@
 - 벤더프리픽스를 사용하면 일부 지원안되는 속성들을 사용할 수 있습니다.
 - 항상 css 는 초기화를 진행후 레이아웃을 잡아야합니다.
 - div 는 중간에 제거하는건 쉽지만 중간에 추가할땐 매우 복잡해지기때문에 나중에 합치더라도 잘게 쪼개는게 좋습니다.
+- 인라인태그와 블록태그에 대한 이해와 어떤 태그가 인라인이고 블록태그인지 구분하는건 중요합니다.
+- html 에는 정말 많은 태그가 있고 css 또한 정말 다양한 속성이 많이있습니다. 이번 클래스에서는 극히 일부만 다뤄졌고 가장 많이 쓰이는 내용들로만 다루었습니다.
+
+## 유용한 사이트
+[web developer tutotial](https://poiemaweb.com/)  
+[인프런](https://www.inflearn.com/)  
+[프로그래머스](https://programmers.co.kr/)  
+[구름EDU](https://edu.goorm.io/)  
+[edwith](https://www.edwith.org/)  
+[MDN](https://developer.mozilla.org/ko/docs/Learn)  
+[css validator](https://jigsaw.w3.org/css-validator/)  
+[html validator](https://validator.w3.org/)  

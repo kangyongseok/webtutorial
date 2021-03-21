@@ -285,6 +285,7 @@ float 은 레이아웃을 잡기위한 속성은 아니고 어떤 컨텐츠를 �
 
 
 ## flex
+[flex box](https://poiemaweb.com/css3-flexbox)
 
 ## positon
 ```css
