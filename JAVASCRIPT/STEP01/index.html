@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/global.css">
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/kanban.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <nav class="nav_area">
+            <ul>
+                <li class="active"><a href="/">Kanban</a></li>
+                <li><a href="./pomodoro.html">Pomodoro</a></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form_area">
+                    <form>
+                        <div class="form-group">
+                            <label for="todo">할일</label>
+                            <input type="text" class="form-control" id="todo" placeholder="할일을 입력해주세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="coment">설명</label>
+                            <input type="text" class="form-control" id="coment" placeholder="상세 내용을 적어주세요">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-primary">제출</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area todo">
+                    <h3 class="bg-info">📌 할일</h3>
+                    <ul class="card_area">
+                        <li class="card">
+                            <h4>자바스크립트 배우기</h4>
+                            <p>자바스크립트 기초 배우기</p>
+                            <p class="date">2021-03-02</p>
+                            <div class="btn_area">
+                                <button>🖌</button>
+                                <button>❌</button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <h4>칸반보드 만들기</h4>
+                            <p>칸반보드의 디자인 구성과 레이아웃 짜기</p>
+                            <p class="date">2021-03-02</p>
+                            <div class="btn_area">
+                                <button>🖌</button>
+                                <button>❌</button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <h4>할일 목록 구성중</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quasi dolor, ducimus, ratione iste et assumenda eaque quia temporibus sit ullam ad repellat nulla odit optio iure ex ea minus.
+                            </p>
+                            <p class="date">2021-03-02</p>
+                            <div class="btn_area">
+                                <button>🖌</button>
+                                <button>❌</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area working">
+                    <h3 class="bg-primary">⏳ 진행중</h3>
+                    <ul class="card_area">
+                        <li class="card">ing1</li>
+                        <li class="card">ing2</li>
+                        <li class="card">ing3</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area done">
+                    <h3 class="bg-warning">✅ 종료</h3>
+                    <ul class="card_area">
+                        <li class="card">done1</li>
+                        <li class="card">done2</li>
+                        <li class="card">done3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
