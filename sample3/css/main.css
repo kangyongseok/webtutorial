@@ -30,6 +30,15 @@ button {
     border: none;
 }
 
+.black {
+    background: black;
+
+}
+
+.black * {
+    color: white;
+}
+
 
 
 /* 스타일 시작 */
@@ -42,6 +51,10 @@ button {
     width: 1130px;
     height: 100px;
     margin: 0 auto;
+}
+
+.link {
+    color: blue;
 }
 
 .header .logo {
