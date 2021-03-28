@@ -19,6 +19,7 @@ ul {
 button {
     background: none;
     border: none;
+    outline: none;
 }
 
 #wrap {

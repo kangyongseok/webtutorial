@@ -60,3 +60,19 @@
     right: 10px;
     bottom: 10px;
 }
+
+.list_area .card_area .card .move_area {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    margin-top: -20px;
+    left: 0;
+    font-size: 30px;
+    opacity: 0.4;
+    display: none;
+    justify-content: space-between;
+}
+
+.list_area .card_area .card:hover .move_area {
+    display: flex;
+}
