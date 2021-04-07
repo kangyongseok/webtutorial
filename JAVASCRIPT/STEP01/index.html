@@ -13,7 +13,7 @@
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="./css/kanban.css">
-    <script src="./js/main.js"></script>
+    <!-- <script src="./js/main.js"></script> -->
 </head>
 
 <body>
@@ -30,13 +30,13 @@
                     <form>
                         <div class="form-group">
                             <label for="todo">할일</label>
-                            <input type="text" class="form-control" id="todo" placeholder="할일을 입력해주세요" name="title">
+                            <input type="text" class="form-control js-todo-input" id="todo" placeholder="할일을 입력해주세요" name="title">
                         </div>
                         <div class="form-group">
                             <label for="coment">설명</label>
-                            <input type="text" class="form-control" id="coment" placeholder="상세 내용을 적어주세요" name="description">
+                            <input type="text" class="form-control js-todo-detail" id="coment" placeholder="상세 내용을 적어주세요" name="description">
                         </div>
-                        <button type="submit" class="btn btn-default btn-primary">제출</button>
+                        <button type="submit" class="btn btn-default btn-primary js-submit-btn">제출</button>
                     </form>
                 </div>
             </div>
