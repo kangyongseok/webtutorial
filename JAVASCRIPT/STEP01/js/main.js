@@ -182,44 +182,28 @@ window.onload = function() {
         moveArea.appendChild(moveLeft)
         moveArea.appendChild(moveRight)
     })
-    let usingList = [];
-    let todoList = [];
-    if (usingList.length === 0 && localStorage.getItem('using')) {
-        usingList = usings
-    }
-    const moveBtns = document.querySelectorAll('.right_move');
-    [...moveBtns].map((btn, i) => {
-        btn.addEventListener('click', (e) => {
-            console.dir(e.target)
-            usingList.push(todoList[i])
-            todoList.splice(i, 1);
-            console.log(todoList, usingList)
-            localStorage.setItem('todo', JSON.stringify(todoList))
-            localStorage.setItem('using', JSON.stringify(usingList))
-            // window.location.reload()
-        })
-    })
+
 
     // form
-    const form = document.querySelector('.form_area form');
-    const submitBtn = document.querySelector('.js-submit-btn');
-    const todoInput = document.querySelector('.js-todo-input');
-    const contentInput = document.querySelector('.js-todo-detail');
-    
-    if (todoList.length === 0 && localStorage.getItem('todo')) {
-        todoList = todos
-    }
-    submitBtn.addEventListener('submit', (e) => {
-        e.preventDefault()
-    })
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
-        todoList.push({
-            title: todoInput.value, 
-            contents: contentInput.value, 
-            date: new this.Date()
-        })
-        localStorage.setItem('todo', JSON.stringify(todoList))
-        window.location.reload()
-    })
+    // const form = document.querySelector('.form_area form');
+    // const submitBtn = document.querySelector('.js-submit-btn');
+    // const todoInput = document.querySelector('.js-todo-input');
+    // const contentInput = document.querySelector('.js-todo-detail');
+    // let todoList = [];
+    // if (todoList.length === 0 && localStorage.getItem('todo')) {
+    //     todoList = todos
+    // }
+    // submitBtn.addEventListener('submit', (e) => {
+    //     e.preventDefault()
+    // })
+    // form.addEventListener('submit', (e) => {
+    //     e.preventDefault()
+    //     todoList.push({
+    //         title: todoInput.value, 
+    //         contents: contentInput.value, 
+    //         date: new this.Date()
+    //     })
+    //     localStorage.setItem('todo', JSON.stringify(todoList))
+    //     window.location.reload()
+    // })
 }
