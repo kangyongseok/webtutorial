@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/global.css">
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/kanban.css">
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <nav class="nav_area">
+            <ul>
+                <li class="active"><a href="/">Kanban</a></li>
+                <li><a href="./pomodoro.html">Pomodoro</a></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form_area">
+                    <form>
+                        <div class="form-group">
+                            <label for="todo">할일</label>
+                            <input type="text" class="form-control js-todo-input" id="todo" placeholder="할일을 입력해주세요" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="coment">설명</label>
+                            <input type="text" class="form-control js-todo-detail" id="coment" placeholder="상세 내용을 적어주세요" name="description">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-primary js-submit-btn">제출</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area todo">
+                    <h3 class="bg-info">📌 할일</h3>
+                    <ul class="card_area"></ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area working">
+                    <h3 class="bg-primary">⏳ 진행중</h3>
+                    <ul class="card_area"></ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="list_area done">
+                    <h3 class="bg-warning">✅ 종료</h3>
+                    <ul class="card_area"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

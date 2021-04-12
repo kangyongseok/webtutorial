@@ -31,3 +31,6 @@ HTML5 가 등장하면서 쿠키가 갖고있는 단점을 해결해줄 새로�
 
 ### SessionStorage
 LocaStorage 와 다르게 웹 브라우저를 종료하면 데이터가 삭제됩니다. LocaStorage 와 같이 HTML5 에서 추가된 저장소로 Web Storage 의 한종류로 이또한 로컬 저장소입니다. 따라서 보안이 필요한 정보에 대해서는 SessionStorage 를 사용하는것이 더 낫습니다. 
+
+
+LocaStorage, SessionStorage 는 서버로 데이터를 전송하지 않습니다.

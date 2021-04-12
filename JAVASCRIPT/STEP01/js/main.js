@@ -121,6 +121,8 @@ window.onload = function() {
         date.classList.add('date');
         btnArea.classList.add('btn_area');
         moveArea.classList.add('move_area');
+        moveLeft.classList.add('left_move');
+        moveRight.classList.add('right_move');
 
         h4.innerText = data.title;
         content.innerText = data.contents;
@@ -159,6 +161,7 @@ window.onload = function() {
         date.classList.add('date');
         btnArea.classList.add('btn_area');
         moveArea.classList.add('move_area');
+        moveLeft.classList.add('left_move');
 
         h4.innerText = data.title;
         content.innerText = data.contents;
@@ -187,12 +190,13 @@ window.onload = function() {
     const moveBtns = document.querySelectorAll('.right_move');
     [...moveBtns].map((btn, i) => {
         btn.addEventListener('click', (e) => {
+            console.dir(e.target)
             usingList.push(todoList[i])
             todoList.splice(i, 1);
             console.log(todoList, usingList)
             localStorage.setItem('todo', JSON.stringify(todoList))
             localStorage.setItem('using', JSON.stringify(usingList))
-            window.location.reload()
+            // window.location.reload()
         })
     })
 
@@ -210,7 +214,11 @@ window.onload = function() {
     })
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-        todoList.push({title: todoInput.value, contents: contentInput.value, date: new this.Date()})
+        todoList.push({
+            title: todoInput.value, 
+            contents: contentInput.value, 
+            date: new this.Date()
+        })
         localStorage.setItem('todo', JSON.stringify(todoList))
         window.location.reload()
     })
