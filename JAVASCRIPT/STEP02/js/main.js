@@ -1,3 +1,5 @@
+// 반복사용되는 코드 리팩토링
+
 window.onload = function() {
     const todos = JSON.parse(localStorage.getItem('todo'));
     const usings = JSON.parse(localStorage.getItem('using'));
@@ -25,46 +27,53 @@ window.onload = function() {
     localStorage.getItem('done') && render(dones, doneUl)
 
     const todoBtnsRight = document.querySelectorAll('.right_move.todo');
-    todoBtnsRight.forEach((btn, i) => {
-        btn.addEventListener('click', (e) => {
-            usingList.push(todoList[i])
-            todoList.splice(i, 1);
-            localStorage.setItem('todo', JSON.stringify(todoList))
-            localStorage.setItem('using', JSON.stringify(usingList))
-            window.location.reload()
-        })
-    })
     const usingBtnsRight = document.querySelectorAll('.right_move.working');
     const usingBtnsLeft = document.querySelectorAll('.left_move.working');
-    usingBtnsRight.forEach((btn, i) => {
-        btn.addEventListener('click', (e) => {
-            doneList.push(usingList[i])
-            usingList.splice(i, 1);
-            localStorage.setItem('using', JSON.stringify(usingList))
-            localStorage.setItem('done', JSON.stringify(doneList))
-            window.location.reload()
-        })
-    })
-    usingBtnsLeft.forEach((btn, i) => {
-        btn.addEventListener('click', (e) => {
-            todoList.push(usingList[i])
-            usingList.splice(i, 1);
-            localStorage.setItem('todo', JSON.stringify(todoList))
-            localStorage.setItem('using', JSON.stringify(usingList))
-            window.location.reload()
-        })
-    })
-
     const doneBtnsRight = document.querySelectorAll('.left_move.done');
-    doneBtnsRight.forEach((btn, i) => {
-        btn.addEventListener('click', (e) => {
-            usingList.push(doneList[i])
-            doneList.splice(i, 1);
-            localStorage.setItem('done', JSON.stringify(doneList))
-            localStorage.setItem('using', JSON.stringify(usingList))
-            window.location.reload()
-        })
-    })
+    moveControl(todoBtnsRight, todoList, usingList, 'todo', 'using');
+    moveControl(usingBtnsRight, usingList, doneList, 'using', 'done');
+    moveControl(usingBtnsLeft, usingList, todoList, 'using', 'todo');
+    moveControl(doneBtnsRight, doneList, usingList, 'done', 'using')
+    // todoBtnsRight.forEach((btn, i) => {
+    //     btn.addEventListener('click', (e) => {
+    //         usingList.push(todoList[i])
+    //         todoList.splice(i, 1);
+    //         localStorage.setItem('todo', JSON.stringify(todoList))
+    //         localStorage.setItem('using', JSON.stringify(usingList))
+    //         window.location.reload()
+    //     })
+    // })
+    
+    
+    // usingBtnsRight.forEach((btn, i) => {
+    //     btn.addEventListener('click', (e) => {
+    //         doneList.push(usingList[i])
+    //         usingList.splice(i, 1);
+    //         localStorage.setItem('using', JSON.stringify(usingList))
+    //         localStorage.setItem('done', JSON.stringify(doneList))
+    //         window.location.reload()
+    //     })
+    // })
+    // usingBtnsLeft.forEach((btn, i) => {
+    //     btn.addEventListener('click', (e) => {
+    //         todoList.push(usingList[i])
+    //         usingList.splice(i, 1);
+    //         localStorage.setItem('todo', JSON.stringify(todoList))
+    //         localStorage.setItem('using', JSON.stringify(usingList))
+    //         window.location.reload()
+    //     })
+    // })
+
+    
+    // doneBtnsRight.forEach((btn, i) => {
+    //     btn.addEventListener('click', (e) => {
+    //         usingList.push(doneList[i])
+    //         doneList.splice(i, 1);
+    //         localStorage.setItem('done', JSON.stringify(doneList))
+    //         localStorage.setItem('using', JSON.stringify(usingList))
+    //         window.location.reload()
+    //     })
+    // })
 
     // form
     const form = document.querySelector('.form_area form');
@@ -87,6 +96,18 @@ window.onload = function() {
         })
         localStorage.setItem('todo', JSON.stringify(todoList))
         window.location.reload()
+    })
+}
+
+function moveControl (elementBtns, prevList, nextList, prevName, nextName) {
+    elementBtns.forEach((btn, i) => {
+        btn.addEventListener('click', (e) => {
+            nextList.push(prevList[i])
+            prevList.splice(i, 1);
+            localStorage.setItem(prevName, JSON.stringify(prevList))
+            localStorage.setItem(nextName, JSON.stringify(nextList))
+            window.location.reload()
+        })
     })
 }
 
