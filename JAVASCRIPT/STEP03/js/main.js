@@ -96,6 +96,42 @@ window.onload = function() {
     const modifyBtn = document.querySelectorAll('.modify');
     const deleteBtn = document.querySelectorAll('.delete');
 
+    modifyBtn.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const classNames = e.target.className.split(' ');
+            const selectCard = e.target.closest(".card");
+            switch(classNames[1]) {
+                case 'todoBtn':
+                    selectCard.innerHTML = `
+                        <div>
+                            <label>할일</label>
+                            <input type="text" value="${todoList[classNames[2]].title}" />
+                        </div>
+                        <div>
+                            <label>설명</label>
+                            <input type="text" value="${todoList[classNames[2]].contents}" />
+                        </div>
+                        <button type="submit" class="modify_submit" >확인</button>
+                    `
+                    break;
+                case 'usingBtn':
+                    selectCard.innerHTML = `
+                        <input type="text" value="${usingList[classNames[2]].title}" />
+                        <input type="text" value="${usingList[classNames[2]].contents}" />
+                    `
+                    break;
+                case 'doneBtn':
+                    selectCard.innerHTML = `
+                        <input type="text" value="${doneList[classNames[2]].title}" />
+                        <input type="text" value="${doneList[classNames[2]].contents}" />
+                    `
+                    break;
+                default: break;
+            }
+            
+        })
+    })
+
     deleteBtn.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             const classNames = e.target.className.split(' ');
