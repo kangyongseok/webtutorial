@@ -3,6 +3,7 @@ function formRender (todos) {
     const title = document.querySelector('.js-todo-input');
     const content = document.querySelector('.js-todo-detail');
     const todoList = todos || [];
+    const todoUl = document.querySelector('.todo .card_area');
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         const fullDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1} - ${new Date().getDate()}`
@@ -13,7 +14,9 @@ function formRender (todos) {
         }
         todoList.push(data)
         localStorage.setItem("todo", JSON.stringify(todoList))
-        window.location.reload()
+        cardRender(todos, todoUl, 'todoBtn')
+        title.value = null
+        content.value = null
     })
 }
 
@@ -96,7 +99,7 @@ window.onload = function() {
     const modifyBtn = document.querySelectorAll('.modify');
     const deleteBtn = document.querySelectorAll('.delete');
 
-    modifyBtn.forEach((btn) => {
+    modifyBtn.forEach((btn, i) => {
         btn.addEventListener('click', (e) => {
             const classNames = e.target.className.split(' ');
             const selectCard = e.target.closest(".card");
@@ -105,14 +108,23 @@ window.onload = function() {
                     selectCard.innerHTML = `
                         <div>
                             <label>할일</label>
-                            <input type="text" value="${todoList[classNames[2]].title}" />
+                            <input class="modify_todo" type="text" value="${todoList[classNames[2]].title}" />
                         </div>
                         <div>
                             <label>설명</label>
-                            <input type="text" value="${todoList[classNames[2]].contents}" />
+                            <input class="modify_content" type="text" value="${todoList[classNames[2]].contents}" />
                         </div>
                         <button type="submit" class="modify_submit" >확인</button>
                     `
+                    document.querySelector('.modify_submit').addEventListener('click', () => {
+                        todoList.splice(i, 1, {
+                            title: document.querySelector('.modify_todo').value,
+                            contents: document.querySelector('.modify_content').value,
+                            date: new Date(),
+                        })
+                        localStorage.setItem('todo', JSON.stringify(todoList))
+                        window.location.reload();
+                    })
                     break;
                 case 'usingBtn':
                     selectCard.innerHTML = `
@@ -131,6 +143,7 @@ window.onload = function() {
             
         })
     })
+
 
     deleteBtn.forEach((btn) => {
         btn.addEventListener('click', (e) => {
