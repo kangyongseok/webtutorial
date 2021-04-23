@@ -101,6 +101,7 @@ window.onload = function() {
 
     modifyBtn.forEach((btn, i) => {
         btn.addEventListener('click', (e) => {
+            console.log(123)
             const classNames = e.target.className.split(' ');
             const selectCard = e.target.closest(".card");
             switch(classNames[1]) {
@@ -123,7 +124,8 @@ window.onload = function() {
                             date: new Date(),
                         })
                         localStorage.setItem('todo', JSON.stringify(todoList))
-                        window.location.reload();
+                        cardRender(todoList, todoUl, 'todoBtn')
+                        // window.location.reload();
                     })
                     break;
                 case 'usingBtn':
