@@ -12,30 +12,16 @@ export const $WriteForm = `
   <form class="ui form">
   <div class="field">
     <label>TITLE</label>
-    <input type="text" name="first-name" placeholder="title">
+    <input class="title_input" type="text" name="first-name" placeholder="title">
   </div>
   <div class="field">
     <label>Content</label>
-    <input type="text" name="last-name" placeholder="content">
+    <input class="content_input" type="text" name="last-name" placeholder="content">
   </div>
   <button class="ui button" type="submit">Submit</button>
   </form>
 </div>
 `;
-
-export const $Card = `
-<div class="ui cards">
-  <div class="card">
-    <div class="content">
-      <div class="header">Veronika Ossi</div>
-      <div class="meta">Friend</div>
-      <div class="description">
-        Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.
-      </div>
-    </div>
-  </div>
-</div>
-`
 
 export const $TodoList = `
 <div class="kanban_board todo">
@@ -46,7 +32,7 @@ export const $TodoList = `
     </div>
   </h2>
   <div class="list_area">
-    ${$Card}
+    
   </div>
 </div>
 `
@@ -59,9 +45,7 @@ export const $UsingList = `
       USING
     </div>
   </h2>
-  <div class="list_area">
-    ${$Card}
-  </div>
+  <div class="list_area"></div>
 </div>
 `
 
@@ -75,9 +59,7 @@ export const $DoneList = `
       DONE
     </div>
   </h2>
-  <div class="list_area">
-    ${$Card}
-  </div>
+  <div class="list_area"></div>
 </div>
 `
 

@@ -8,3 +8,13 @@
     padding: 30px 0;
 }
 
+.list_area {
+    width: 100%;
+    min-height: 100px;
+    padding: 20px 0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
