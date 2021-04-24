@@ -18,7 +18,7 @@ export const $WriteForm = `
     <label>Content</label>
     <input class="content_input" type="text" name="last-name" placeholder="content">
   </div>
-  <button class="ui button" type="submit">Submit</button>
+  <button class="ui primary button" type="submit">Submit</button>
   </form>
 </div>
 `;
@@ -63,4 +63,15 @@ export const $DoneList = `
 </div>
 `
 
-
+export const $ModifyModal = `
+  <div class="modal_contents">
+    <button class="modal_close"><i class="large grey white close icon link"></i></button>
+    <h1 class="modal_header">수정</h1>
+    <div class="modal_body">body</div>
+    <div class="modal_footer">
+      <button class="ui primary button">
+        Save
+      </button>
+    </div>
+  </div>
+`
