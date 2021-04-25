@@ -86,3 +86,7 @@
     padding: 20px;
     background: #eeeeee;
 }
+
+.modal_body label {
+    display: block;
+}

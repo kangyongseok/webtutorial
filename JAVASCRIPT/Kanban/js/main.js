@@ -79,7 +79,7 @@ function render () {
     todoUl.innerHTML = cardRender(todos, 'todos')
 
     cardDelete('todos', todos, render)
-    cardModify('todos')
+    cardModify('todos', todos, render)
     modalClose()
 }
 

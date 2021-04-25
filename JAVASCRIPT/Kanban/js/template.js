@@ -10,15 +10,15 @@ export const $GridLayout = `
 export const $WriteForm = `
 <div class="form_area">
   <form class="ui form">
-  <div class="field">
-    <label>TITLE</label>
-    <input class="title_input" type="text" name="first-name" placeholder="title">
-  </div>
-  <div class="field">
-    <label>Content</label>
-    <input class="content_input" type="text" name="last-name" placeholder="content">
-  </div>
-  <button class="ui primary button" type="submit">Submit</button>
+    <div class="field">
+      <label>TITLE</label>
+      <input class="title_input" type="text" name="first-name" placeholder="title">
+    </div>
+    <div class="field">
+      <label>Content</label>
+      <input class="content_input" type="text" name="last-name" placeholder="content">
+    </div>
+    <button class="ui primary button" type="submit">Submit</button>
   </form>
 </div>
 `;
@@ -67,7 +67,18 @@ export const $ModifyModal = `
   <div class="modal_contents">
     <button class="modal_close"><i class="large grey white close icon link"></i></button>
     <h1 class="modal_header">수정</h1>
-    <div class="modal_body">body</div>
+    <div class="modal_body">
+      <form class="ui form">
+        <div class="field">
+          <label>TITLE</label>
+          <input class="title_input" type="text" name="first-name" placeholder="title">
+        </div>
+        <div class="field">
+          <label>Content</label>
+          <input class="content_input" type="text" name="last-name" placeholder="content">
+        </div>
+      </form>
+    </div>
     <div class="modal_footer">
       <button class="ui primary button">
         Save

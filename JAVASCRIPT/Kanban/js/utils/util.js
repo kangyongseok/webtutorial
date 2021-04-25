@@ -28,12 +28,17 @@ export function cardDelete (area, list, render) {
     })
 }
 
-export function cardModify (area) {
+export function cardModify (area, lists, render) {
     const cardModify = document.querySelectorAll(`.${area}.modify`);
     const modal = document.querySelector('.modal_wrap');
+    const modalInputTitle = document.querySelector('.modal_body .title_input');
+    const modalInputContent = document.querySelector('.modal_body .content_input');
     [...cardModify].forEach((btn, i) => {
         btn.addEventListener('click', () => {
             modal.style = "display: block";
+            modalInputTitle.value = lists[i].title
+            modalInputContent.value = lists[i].content
+            modalSave(area, lists, i, render)
         })
     })
 }
@@ -51,4 +56,22 @@ export function modalClose () {
             }
         })
     }
+}
+
+export function modalSave (area, lists, index, render) {
+    const $save = document.querySelector('.modal_footer button');
+    const $modalInputTitle = document.querySelector('.modal_body .title_input');
+    const $modalInputContent = document.querySelector('.modal_body .content_input');
+    $save.addEventListener('click', () => {
+        const modifyData = {
+            title: $modalInputTitle.value,
+            content: $modalInputContent.value,
+            date: createDate(),
+        }
+        console.log(lists)
+        lists.splice(index, 1, modifyData);
+        localStorage.setItem(area, JSON.stringify(lists))
+        modalClose()
+        render()
+    })
 }
