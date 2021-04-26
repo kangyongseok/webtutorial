@@ -75,3 +75,7 @@ export function modalSave (area, lists, index, render) {
         render()
     })
 }
+
+export function modeCard () {
+    
+}
