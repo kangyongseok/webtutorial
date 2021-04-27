@@ -76,6 +76,16 @@ export function modalSave (area, lists, index, render) {
     })
 }
 
-export function modeCard () {
-    
+export function moveCard (area, prevList, nextList, nextKey, render) {
+    const $next = document.querySelectorAll(`.${area}.next`);
+    console.log($next);
+    [...$next].forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+            nextList.push(prevList[i])
+            prevList.splice(i, 1);
+            localStorage.setItem(area, JSON.stringify(prevList))
+            localStorage.setItem(nextKey, JSON.stringify(nextList))
+            render()
+        })
+    })
 }

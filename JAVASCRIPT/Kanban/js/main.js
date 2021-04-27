@@ -6,7 +6,7 @@ import {
     $DoneList,
     $ModifyModal,
 } from './template.js';
-import { createDate, cardDelete, cardModify, modalClose } from './utils/util.js';
+import { createDate, cardDelete, cardModify, modalClose, moveCard } from './utils/util.js';
 
 
 const todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -15,11 +15,17 @@ const done = JSON.parse(localStorage.getItem('dones')) || [];
 
 
 function cardRender (lists, btnName) {
+    
     return lists.map((item, i) => {
         const cardItem = `
         <div class="ui cards" style="width: 95%">
             <div class="card" style="width: 100%">
                 <div class="btn_area">
+                    ${btnName !== 'todos' && (
+                        `
+                        <button class="${btnName} prev"><i class="large red history icon"></i></button>
+                        `
+                    )}
                     <button class="${btnName} next"><i class="large teal check circle outline icon link"></i></button>
                     <button class="${btnName} modify"><i class="large edit outline icon link"></i></button>
                     <button class="${btnName} delete"><i class="large grey red close icon link"></i></button>
@@ -75,11 +81,18 @@ function render () {
     const $TitleInput = document.querySelector('.title_input');
     $TitleInput.focus()
 
-    const todoUl = document.querySelector('.todo .list_area')
-    todoUl.innerHTML = cardRender(todos, 'todos')
+    const todoUl = document.querySelector('.todo .list_area');
+    const usingUl = document.querySelector('.using .list_area');
+    todoUl.innerHTML = cardRender(todos, 'todos');
+    usingUl.innerHTML = cardRender(usings, 'usings');
 
-    cardDelete('todos', todos, render)
-    cardModify('todos', todos, render)
+    cardDelete('todos', todos, render);
+    cardDelete('usings', usings, render);
+
+    cardModify('todos', todos, render);
+    cardModify('usings', usings, render);
+
+    moveCard('todos', todos, usings, 'usings', render);
     modalClose()
 }
 
