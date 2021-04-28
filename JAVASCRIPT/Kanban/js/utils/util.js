@@ -68,7 +68,7 @@ export function modalSave (area, lists, index, render) {
             content: $modalInputContent.value,
             date: createDate(),
         }
-        console.log(lists)
+
         lists.splice(index, 1, modifyData);
         localStorage.setItem(area, JSON.stringify(lists))
         modalClose()
@@ -76,16 +76,30 @@ export function modalSave (area, lists, index, render) {
     })
 }
 
-export function moveCard (area, prevList, nextList, nextKey, render) {
-    const $next = document.querySelectorAll(`.${area}.next`);
-    console.log($next);
+export function nextCard (...arg) {
+    const [prevKey, nextKey, prevList, nextList, render] = arg;
+    const $next = document.querySelectorAll(`.${prevKey}.next`);
     [...$next].forEach((btn, i) => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
             nextList.push(prevList[i])
             prevList.splice(i, 1);
-            localStorage.setItem(area, JSON.stringify(prevList))
+            localStorage.setItem(prevKey, JSON.stringify(prevList))
             localStorage.setItem(nextKey, JSON.stringify(nextList))
             render()
         })
     })
+}
+
+export function prevCard (...arg) {
+    const [prevKey, nextKey, prevList, nextList, render] = arg;
+    const $prev = document.querySelectorAll(`.${prevKey}.prev`);
+    [...$prev].forEach((btn, i) => {
+        btn.addEventListener('click', (e) => {
+            nextList.push(prevList[i])
+            prevList.splice(i, 1);
+            localStorage.setItem(prevKey, JSON.stringify(prevList))
+            localStorage.setItem(nextKey, JSON.stringify(nextList))
+            render()
+        })
+    });
 }

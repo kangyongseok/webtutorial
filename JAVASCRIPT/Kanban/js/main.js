@@ -6,12 +6,12 @@ import {
     $DoneList,
     $ModifyModal,
 } from './template.js';
-import { createDate, cardDelete, cardModify, modalClose, moveCard } from './utils/util.js';
+import { createDate, cardDelete, cardModify, modalClose, nextCard, prevCard } from './utils/util.js';
 
 
 const todos = JSON.parse(localStorage.getItem('todos')) || [];
 const usings = JSON.parse(localStorage.getItem('usings')) || [];
-const done = JSON.parse(localStorage.getItem('dones')) || [];
+const dones = JSON.parse(localStorage.getItem('dones')) || [];
 
 
 function cardRender (lists, btnName) {
@@ -21,11 +21,11 @@ function cardRender (lists, btnName) {
         <div class="ui cards" style="width: 95%">
             <div class="card" style="width: 100%">
                 <div class="btn_area">
-                    ${btnName !== 'todos' && (
+                    ${btnName !== 'todos' ? (
                         `
                         <button class="${btnName} prev"><i class="large red history icon"></i></button>
                         `
-                    )}
+                    ) : ''}
                     <button class="${btnName} next"><i class="large teal check circle outline icon link"></i></button>
                     <button class="${btnName} modify"><i class="large edit outline icon link"></i></button>
                     <button class="${btnName} delete"><i class="large grey red close icon link"></i></button>
@@ -83,16 +83,25 @@ function render () {
 
     const todoUl = document.querySelector('.todo .list_area');
     const usingUl = document.querySelector('.using .list_area');
+    const doneUl = document.querySelector('.done .list_area');
+
     todoUl.innerHTML = cardRender(todos, 'todos');
     usingUl.innerHTML = cardRender(usings, 'usings');
+    doneUl.innerHTML = cardRender(dones, 'dones');
 
     cardDelete('todos', todos, render);
     cardDelete('usings', usings, render);
+    cardDelete('dones', dones, render);
 
     cardModify('todos', todos, render);
     cardModify('usings', usings, render);
+    cardModify('dones', dones, render);
 
-    moveCard('todos', todos, usings, 'usings', render);
+    nextCard('todos', 'usings', todos, usings, render);
+    nextCard('usings', 'dones', usings, dones, render);
+    prevCard('dones', 'usings', dones, usings, render);
+    prevCard('usings', 'todos', usings, todos, render);
+
     modalClose()
 }
 
