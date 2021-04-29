@@ -6,7 +6,14 @@ import {
     $DoneList,
     $ModifyModal,
 } from './template.js';
-import { createDate, cardDelete, cardModify, modalClose, nextCard, prevCard } from './utils/util.js';
+import { 
+    createDate, 
+    cardDelete, 
+    cardModify, 
+    modalClose, 
+    nextCard, 
+    prevCard
+} from './utils/util.js';
 
 
 const todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -15,7 +22,6 @@ const dones = JSON.parse(localStorage.getItem('dones')) || [];
 
 
 function cardRender (lists, btnName) {
-    
     return lists.map((item, i) => {
         const cardItem = `
         <div class="ui cards" style="width: 95%">
@@ -103,6 +109,7 @@ function render () {
     prevCard('usings', 'todos', usings, todos, render);
 
     modalClose()
+    respondive()
 }
 
 render()

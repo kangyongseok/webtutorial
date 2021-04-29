@@ -90,3 +90,7 @@
 .modal_body label {
     display: block;
 }
+
+.ui .row {
+    width: 100%;
+}
