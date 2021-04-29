@@ -36,8 +36,8 @@ function cardModify(area, lists, render) {
     const modalInputContent = document.querySelector('.modal_body .content_input');
     [...cardModify].forEach((btn, i) => {
         btn.addEventListener('click', () => {
-            modal.style = "display: block";
-            modalInputTitle.value = lists[i].title;
+            modal.style.display = "block"; // modal.style 에 직접 스트링 값을 할당하는것은 불가능 style 은 읽기 전용
+            modalInputTitle.value = lists[i].title; // value 가 없는 객체이기때문에 value 를 갖게 만들어 주려면 <HTMLInputElement> 로 캐스팅 해야한다
             modalInputContent.value = lists[i].content;
             modalSave(area, lists, i, render);
         });
@@ -49,11 +49,11 @@ function modalClose() {
     const closeBtn = document.querySelector('.modal_close');
     if (modal) {
         closeBtn.addEventListener('click', () => {
-            modal.style = "display: none";
+            modal.style.display = "none";
         });
         window.addEventListener('keydown', (e) => {
             if (e.keyCode === 27) {
-                modal.style = "display: none";
+                modal.style.display = "none";
             }
         });
     }
