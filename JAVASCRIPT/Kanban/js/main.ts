@@ -16,12 +16,12 @@ import {
 } from './utils/util.js';
 
 
-const todos = JSON.parse(localStorage.getItem('todos')) || [];
-const usings = JSON.parse(localStorage.getItem('usings')) || [];
-const dones = JSON.parse(localStorage.getItem('dones')) || [];
+const todos = JSON.parse(localStorage.getItem('todos') || '[]'); // localstorage 에는 문자열만 들어가므로 null 일때 리턴할 스트링값이 필요
+const usings = JSON.parse(localStorage.getItem('usings') || '[]');
+const dones = JSON.parse(localStorage.getItem('dones') || '[]');
 
 
-function cardRender (lists, btnName) {
+function cardRender (lists: Array<{title: string, date: string, content: string}>, btnName: string) {
     return lists.map((item, i) => {
         const cardItem = `
         <div class="ui cards" style="width: 95%">
@@ -49,9 +49,9 @@ function cardRender (lists, btnName) {
 }
 
 function formEvent () {
-    const $Form = document.querySelector('.form_area .form');
-    const $TitleInput = document.querySelector('.title_input');
-    const $ContentInput = document.querySelector('.content_input');
+    const $Form = <HTMLInputElement>document.querySelector('.form_area .form');
+    const $TitleInput = <HTMLInputElement>document.querySelector('.title_input');
+    const $ContentInput = <HTMLInputElement>document.querySelector('.content_input');
     $Form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -69,8 +69,8 @@ function formEvent () {
 }
 
 function render () {
-    const $root = document.querySelector('#root');
-    const $modal = document.createElement('div');
+    const $root = <HTMLElement>document.querySelector('#root');
+    const $modal = <HTMLElement>document.createElement('div');
 
     $modal.classList.add('modal_wrap');
     $modal.innerHTML = $ModifyModal;
@@ -84,12 +84,12 @@ function render () {
     $grids[3].innerHTML = $DoneList
 
     formEvent()
-    const $TitleInput = document.querySelector('.title_input');
+    const $TitleInput = <HTMLInputElement>document.querySelector('.title_input');
     $TitleInput.focus()
 
-    const todoUl = document.querySelector('.todo .list_area');
-    const usingUl = document.querySelector('.using .list_area');
-    const doneUl = document.querySelector('.done .list_area');
+    const todoUl = <HTMLElement>document.querySelector('.todo .list_area');
+    const usingUl = <HTMLElement>document.querySelector('.using .list_area');
+    const doneUl = <HTMLElement>document.querySelector('.done .list_area');
 
     todoUl.innerHTML = cardRender(todos, 'todos');
     usingUl.innerHTML = cardRender(usings, 'usings');
@@ -109,7 +109,6 @@ function render () {
     prevCard('usings', 'todos', usings, todos, render);
 
     modalClose()
-    respondive()
 }
 
 render()

@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const template_js_1 = require("./template.js");
-const util_js_1 = require("./utils/util.js");
-const todos = JSON.parse(localStorage.getItem('todos')) || [];
-const usings = JSON.parse(localStorage.getItem('usings')) || [];
-const dones = JSON.parse(localStorage.getItem('dones')) || [];
+import { $WriteForm, $GridLayout, $TodoList, $UsingList, $DoneList, $ModifyModal, } from './template.js';
+import { createDate, cardDelete, cardModify, modalClose, nextCard, prevCard } from './utils/util.js';
+const todos = JSON.parse(localStorage.getItem('todos') || '[]'); // localstorage 에는 문자열만 들어가므로 null 일때 리턴할 스트링값이 필요
+const usings = JSON.parse(localStorage.getItem('usings') || '[]');
+const dones = JSON.parse(localStorage.getItem('dones') || '[]');
 function cardRender(lists, btnName) {
     return lists.map((item, i) => {
         const cardItem = `
@@ -37,7 +35,7 @@ function formEvent() {
         e.preventDefault();
         const title = $TitleInput.value;
         const content = $ContentInput.value;
-        const formValue = { title, content, date: util_js_1.createDate() };
+        const formValue = { title, content, date: createDate() };
         if (!title)
             return alert('제목을 입력해 주세요.');
         if (!content)
@@ -51,14 +49,14 @@ function render() {
     const $root = document.querySelector('#root');
     const $modal = document.createElement('div');
     $modal.classList.add('modal_wrap');
-    $modal.innerHTML = template_js_1.$ModifyModal;
-    $root.innerHTML = template_js_1.$GridLayout;
+    $modal.innerHTML = $ModifyModal;
+    $root.innerHTML = $GridLayout;
     $root.appendChild($modal);
     const $grids = document.querySelectorAll('.column');
-    $grids[0].innerHTML = template_js_1.$WriteForm;
-    $grids[1].innerHTML = template_js_1.$TodoList;
-    $grids[2].innerHTML = template_js_1.$UsingList;
-    $grids[3].innerHTML = template_js_1.$DoneList;
+    $grids[0].innerHTML = $WriteForm;
+    $grids[1].innerHTML = $TodoList;
+    $grids[2].innerHTML = $UsingList;
+    $grids[3].innerHTML = $DoneList;
     formEvent();
     const $TitleInput = document.querySelector('.title_input');
     $TitleInput.focus();
@@ -68,17 +66,16 @@ function render() {
     todoUl.innerHTML = cardRender(todos, 'todos');
     usingUl.innerHTML = cardRender(usings, 'usings');
     doneUl.innerHTML = cardRender(dones, 'dones');
-    util_js_1.cardDelete('todos', todos, render);
-    util_js_1.cardDelete('usings', usings, render);
-    util_js_1.cardDelete('dones', dones, render);
-    util_js_1.cardModify('todos', todos, render);
-    util_js_1.cardModify('usings', usings, render);
-    util_js_1.cardModify('dones', dones, render);
-    util_js_1.nextCard('todos', 'usings', todos, usings, render);
-    util_js_1.nextCard('usings', 'dones', usings, dones, render);
-    util_js_1.prevCard('dones', 'usings', dones, usings, render);
-    util_js_1.prevCard('usings', 'todos', usings, todos, render);
-    util_js_1.modalClose();
-    respondive();
+    cardDelete('todos', todos, render);
+    cardDelete('usings', usings, render);
+    cardDelete('dones', dones, render);
+    cardModify('todos', todos, render);
+    cardModify('usings', usings, render);
+    cardModify('dones', dones, render);
+    nextCard('todos', 'usings', todos, usings, render);
+    nextCard('usings', 'dones', usings, dones, render);
+    prevCard('dones', 'usings', dones, usings, render);
+    prevCard('usings', 'todos', usings, todos, render);
+    modalClose();
 }
 render();
