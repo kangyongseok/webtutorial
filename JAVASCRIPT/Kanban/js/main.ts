@@ -20,8 +20,7 @@ const todos = JSON.parse(localStorage.getItem('todos') || '[]'); // localstorage
 const usings = JSON.parse(localStorage.getItem('usings') || '[]');
 const dones = JSON.parse(localStorage.getItem('dones') || '[]');
 
-
-function cardRender (lists: Array<{title: string, date: string, content: string}>, btnName: string) {
+const cardRender = (lists: Array<{title: string, date: string, content: string}>, btnName: string) => {
     return lists.map((item, i) => {
         const cardItem = `
         <div class="ui cards" style="width: 95%">
@@ -48,7 +47,7 @@ function cardRender (lists: Array<{title: string, date: string, content: string}
     }).join('')
 }
 
-function formEvent () {
+const formEvent = () => {
     const $Form = <HTMLInputElement>document.querySelector('.form_area .form');
     const $TitleInput = <HTMLInputElement>document.querySelector('.title_input');
     const $ContentInput = <HTMLInputElement>document.querySelector('.content_input');
@@ -68,7 +67,7 @@ function formEvent () {
     })
 }
 
-function render () {
+const render = () => {
     const $root = <HTMLElement>document.querySelector('#root');
     const $modal = <HTMLElement>document.createElement('div');
 

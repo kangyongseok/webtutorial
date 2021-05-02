@@ -1,11 +1,11 @@
-function doubleNum (value: number) {
+const doubleNum = (value: number) => {
     if (String(value).length < 2) {
         return `0${value}`
     }
     return value
 }
 
-export function createDate () {
+export const createDate = () => {
     const today = new Date();   
     const year = today.getFullYear(); // 년도
     const month = today.getMonth() + 1;  // 월
@@ -17,7 +17,7 @@ export function createDate () {
     return writeDate
 }
 
-export function cardDelete (area: string, list: Array<object>, render: Function) {
+export const cardDelete = (area: string, list: Array<object>, render: Function) => {
     const cardDelete = document.querySelectorAll(`.${area}.delete`);
     [...cardDelete].forEach((btn, i) => {
         btn.addEventListener('click', () => {
@@ -28,7 +28,7 @@ export function cardDelete (area: string, list: Array<object>, render: Function)
     })
 }
 
-export function cardModify (area: string, lists: [{title: string, content: string}], render: Function) {
+export const cardModify = (area: string, lists: [{title: string, content: string}], render: Function) => {
     const cardModify = document.querySelectorAll(`.${area}.modify`);
     const modal = <HTMLElement>document.querySelector('.modal_wrap');
     const modalInputTitle = <HTMLInputElement>document.querySelector('.modal_body .title_input');
@@ -43,7 +43,7 @@ export function cardModify (area: string, lists: [{title: string, content: strin
     })
 }
 
-export function modalClose () {
+export const modalClose = () => {
     const modal =  <HTMLElement>document.querySelector('.modal_wrap');
     const closeBtn = <HTMLElement>document.querySelector('.modal_close');
     if (modal) {
@@ -58,7 +58,7 @@ export function modalClose () {
     }
 }
 
-export function modalSave (area: string, lists: [{title: string, content: string}], index: number, render: Function) {
+export const modalSave = (area: string, lists: [{title: string, content: string}], index: number, render: Function) => {
     const $save = document.querySelector('.modal_footer button');
     const $modalInputTitle = <HTMLInputElement>document.querySelector('.modal_body .title_input');
     const $modalInputContent = <HTMLInputElement>document.querySelector('.modal_body .content_input');
@@ -76,7 +76,7 @@ export function modalSave (area: string, lists: [{title: string, content: string
     })
 }
 
-export function nextCard (...arg: [string, string, Array<object>, Array<object>, Function]) {
+export const nextCard = (...arg: [string, string, Array<object>, Array<object>, Function]) => {
     const [prevKey, nextKey, prevList, nextList, render] = arg;
     const $next = document.querySelectorAll(`.${prevKey}.next`);
     [...$next].forEach((btn, i) => {
@@ -98,7 +98,7 @@ interface Card {
     render: Function,
 }
 
-export function prevCard (...arg: [string, string, Array<object>, Array<object>, Function]) {
+export const prevCard = (...arg: [string, string, Array<object>, Array<object>, Function]) => {
     const [prevKey, nextKey, prevList, nextList, render] = arg;
     const $prev = document.querySelectorAll(`.${prevKey}.prev`);
     [...$prev].forEach((btn, i) => {
