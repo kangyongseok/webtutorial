@@ -4,106 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- 폰트어썸 CDN 불러와서 아이콘 사용가능 -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>네이버</title>
-    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <div class="wrqp">
-        <div class="header_wrap">
-            <header class="header">
-                <h1 class="logo">네이버</h1>
-                <form action="">
-                    <input type="text">
-                    <button type="submit" class="search">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </header>
-        </div>
-        <div class="nav_wrap">
-            <nav class="nav">
-                <ul class="menu_list"></ul>
-            </nav>
-        </div>
-        <div class="contents_wrqp">
-            <section class="main_contetns_area">
-                <div class="banner">
-                    <img src="https://ssl.pstatic.net/tveta/libs/1328/1328057/cc9b57d886c5348009ef_20210302164515680.png" alt="">
-                </div>
-                <div class="speed_news">
-                    연합뉴스 > '골든 타임' 흘려보낸 野단일화…남은 시나리오는
-                </div>
-                <div class="news_paper_list">
-                    <ul>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                        <li><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png" alt=""></li>
-                    </ul>
-                </div>
-                <div class="today_article">
-                    <div>
-                        <img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fwww%2Fmobile%2Fedit%2F2021%2F0303%2Fupload_1614778896339oCtgD.jpg%22&type=nf340_228" alt="">
-                        <div>
-                            <p>리빙</p>
-                            <p>최소한의 변화로, 혼자살던집을 신혼집으로</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae voluptatibus nam aliquid, eveniet rem molestiae consectetur fugiat, commodi culpa nisi dolor alias! Eligendi quo doloremque fugit sit id, quis veniam!</p>
+    <div id="wrap">
+        <header class="header_area">
+            <div class="util_menu">
+                <ul>
+                    <li><a href="#">네이버를 시작페이지로</a></li>
+                    <li><a href="#">쥬니어네이버</a></li>
+                    <li><a href="#">해피빈</a></li>
+                </ul>
+            </div>
+            <div class="logo_area">
+                <h1 class="logo">네이버로고</h1>
+                <input type="text" />
+                <img src="" alt="검색 아이콘" />
+            </div>
+        </header>
+        <nav class="gnb_area">
+            <ul class="fix_menu">
+                <li><a href="#">메일</a></li>
+                <li><a href="#">카페</a></li>
+                <li><a href="#">블로그</a></li>
+                <li><a href="#">지식인</a></li>
+                <li><a href="#">쇼핑</a></li>
+                <li><a href="#">TV</a></li>
+            </ul>
+            <ul class="favorit_menu">
+                <li><a href="#">사전</a></li>
+                <li><a href="#">뉴스</a></li>
+                <li><a href="#">증권</a></li>
+                <li><a href="#">부동산</a></li>
+                <li><a href="#">지도</a></li>
+                <li><a href="#">웹툰</a></li>
+            </ul>
+            <div class="weather_info_area">
+                <p>미세</p>
+                <p>👨‍🦲</p>
+                <p>보통</p>
+                <p>관산동</p>
+            </div>
+        </nav>
+        <div class="contents_area">
+            <section class="main_contents">
+                <section class="ad_area">
+                    <img src="" alt="메인 광고 배너">
+                </section>
+                <section class="news_stand">
+                    <div class="news_slide_area">
+                        <div class="quick_news">
+                            <p>연합뉴스</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="category">
+                            <ul>
+                                <li><a href="#">네이버뉴스</a></li>
+                                <li><a href="#">연예</a></li>
+                                <li><a href="#">스포츠</a></li>
+                                <li><a href="#">경제</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div>
-                        <img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fwww%2Fmobile%2Fedit%2F2021%2F0303%2Fupload_1614778896339oCtgD.jpg%22&type=nf340_228" alt="">
+                    <div class="news_stand_list">
                         <div>
-                            <p>리빙</p>
-                            <p>최소한의 변화로, 혼자살던집을 신혼집으로</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae voluptatibus nam aliquid, eveniet rem molestiae consectetur fugiat, commodi culpa nisi dolor alias! Eligendi quo doloremque fugit sit id, quis veniam!</p>
+                            <p>뉴스스탠드 > 구독한 언론사 전체언론사</p>
+                            <ul>
+                                <li><button>icon1</button></li>
+                                <li><button>icon2</button></li>
+                                <li><button>icon3</button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li><a href="#">시사인</a></li>
+                                <li><a href="#">YTN</a></li>
+                                <li><a href="#">매일경제</a></li>
+                                <li><a href="#">이투데이</a></li>
+                                <li><a href="#">아시아경제</a></li>
+                                <li><a href="#">문화일보</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div>
-                        <img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fwww%2Fmobile%2Fedit%2F2021%2F0303%2Fupload_1614778896339oCtgD.jpg%22&type=nf340_228" alt="">
-                        <div>
-                            <p>리빙</p>
-                            <p>최소한의 변화로, 혼자살던집을 신혼집으로</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae voluptatibus nam aliquid, eveniet rem molestiae consectetur fugiat, commodi culpa nisi dolor alias! Eligendi quo doloremque fugit sit id, quis veniam!</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fwww%2Fmobile%2Fedit%2F2021%2F0303%2Fupload_1614778896339oCtgD.jpg%22&type=nf340_228" alt="">
-                        <div>
-                            <p>리빙</p>
-                            <p>최소한의 변화로, 혼자살던집을 신혼집으로</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae voluptatibus nam aliquid, eveniet rem molestiae consectetur fugiat, commodi culpa nisi dolor alias! Eligendi quo doloremque fugit sit id, quis veniam!</p>
-                        </div>
-                    </div>
-                </div>
+                </section>
+                <section class="today_article"></section>
             </section>
-            <aside class="side_area">
-                <div class="login_area">
-                    <p>네이버를 더 안전하고 편안하게 이용하세요</p>
-                    <button class="login_btn">NAVER 로그인</button>
-                    <div class="login_bottom">
-                        <p>아이디</p>
-                        <p>비밀번호 찾기</p>
-                        <p>회원가입</p>
-                    </div>
-                </div>
-                <div class="economy">
-                    환율 USD 1250
-                </div>
-                <div class="side_banner">
-                    <img src="https://ssl.pstatic.net/tveta/libs/1328/1328186/8c7b5ff728d07c3fb6c6_20210302140647904.jpg" alt="">
-                </div>
+            <aside class="aside_area">
+
             </aside>
         </div>
-        <footer class="footer_area">
-            footer
-        </footer>
+        <footer class="footer_area"></footer>
     </div>
-
-
-    <script src="./js/main.js"></script>
 </body>
 </html>
