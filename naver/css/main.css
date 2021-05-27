@@ -42,7 +42,17 @@ a {
 .category_tab ul,
 .category_tab ul li,
 .main_articles,
-.card_area .card {
+.card,
+.login_bottom,
+.title_group,
+.shop_group ul,
+.shop_tab ul,
+.footer_banner,
+.footer_banner_item,
+.footer_menu_area,
+.footer_menu_area dl,
+.project,
+.footer_utils_menu ul {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -234,17 +244,147 @@ a {
     width: 364px;
 }
 
-.main_articles .card_area .card {
+.card {
     align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.main_articles .card_area .card img {
+.card img {
     margin-right: 20px;
 }
 
 
+.category_contents_list {
+    border-top: 1px solid #cccccc;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+
+
 .contents_area .aside_area {
-    background: tan;
     width: 350px;
+}
+
+.aside_area .login_area {
+    background: #f7f9fa;
+    border: 1px solid #dae1e6;
+    padding: 16px 16px 12px 17px;
+    margin-bottom: 10px;
+}
+
+.aside_area .login_area button {
+    border: none;
+    width: 100%;
+    height: 48px;
+    background: #19ce60;
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.aside_area .login_area .login_bottom p {
+    font-size: 13px;
+}
+
+.aside_area .login_area .login_bottom p:last-child {
+    margin-left: auto;
+}
+
+.shopping_area {
+    /* background: blue; */
+    margin-top: 20px;
+}
+
+.shopping_area .shop_group {
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    /* padding: 10px; */
+}
+
+.shopping_area .shop_group>ul {
+    background: #eeeeee;
+    padding: 10px;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+
+.shopping_area .shop_group>ul li {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.shopping_area .item_area {
+    padding: 0 10px;
+}
+
+.shopping_area .item_area ul {
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.shopping_area .item_area ul li {
+    margin: 20px 0;
+}
+
+
+
+
+.footer_area {
+    margin-top: 30px;
+    border-top: 1px solid #cccccc;
+    background: #fafbfc;
+    padding: 20px;
+}
+
+.footer_banner {
+    width: 1130px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.footer_banner_item {
+    width: 100%;
+}
+
+.footer_banner_item img {
+    margin-right: 20px;
+}
+
+.footer_menu_area {
+    width: 1130px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #cccccc;
+}
+
+.footer_menu_area dl {
+    margin-bottom: 10px;
+}
+
+.footer_menu_area dt {
+    font-weight: bold;
+    min-width: 130px;
+}
+
+.footer_menu_area dd {
+    margin-right: 20px;
+    color: #888888;
+}
+
+.footer_menu_area .project {
+    margin-left: auto;
+}
+
+.footer_utils_menu {
+    width: 1130px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    font-size: 12px;
+}
+
+.footer_utils_menu li {
+    margin-right: 20px;
 }
