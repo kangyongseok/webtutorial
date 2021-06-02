@@ -102,11 +102,67 @@ function outerFunc () {
     const x = 10;
     innterFunc()
 }
-function innterFunc () {
+function innerFunc () {
     console.log(x); // 1
-    console.log(this)
 }
 
 outerFunc()
 ```
 
+두번째 예제는 `outerFunc` 와 `innerFunc` 둘다 전역에 선언되어있고 호출은 각각 전역과 `outerFunc`
+ 내부에서 호출하고 있다. 이때 `innerFunc` 에서 확인한 x 의 값은 전역의 변수가 갖고있는 1이 된다.
+
+### 렉시컬 스코프
+자바스크립트의 엔진은 함수를 호출 기준이 아니라 어디서 선언했는지를 기준으로 상위 스코프를 결정하는데 이를 렉시컬 스코프라고 부른다.
+
+### 클로저와 렉시컬 환경
+```js
+const x = 1;
+function outer () {
+    const x = 10;
+    const inner = function () { console.log(x) };
+    return inner;
+}
+
+const innerFunc = outer();
+innerFunc() // 10
+```
+
+원래대로라면 자바스크립트의 함수는 호출되면 한번 실행되고 생명주기를 마감한다. 즉 위의 코드는 outer 함수를 실행하고 마감되었어야하지만 innerFunc 를 실행했을때 outer 가 갖고있는 값을 리턴하게된다. outer의 실행컨텍스트는 스택에서 제거되었지만 지역변수로 있던값은 inner 에 의해서 참조된상태로 존재하고 그 값을 리턴하는데 이러한 함수를 클로저라고 부른다.
+
+
+
+## 실행 컨텍스트
+
+
+## 프로토타입
+
+
+
+## this
+this는 자기 자신이 속한 객체 또는 자신이 생성할 인스턴스를 가리키는 자기참조변수다. this 를 통해 자신이 속한 객체 또는 자신이 생성할 인스턴스의 프로퍼티나 메서드를 참조할 수 있다.
+
+### 자기 자신이 속한 객체
+```js
+const cat = {
+    name: '장화신은 고양이',
+    getName() {
+        return this.name + 1
+    }
+}
+console.log(cat.getName()) // "장화신은 고양이1"
+```
+
+### 자신이 생성할 인스턴스의 프로퍼티나 메서드참조
+```js
+function Car (name) {
+    this.name = name
+}
+
+Car.prototype.getName = function () {
+    return this.name + 1
+}
+
+const car1 = new Car('벤츠');
+console.log(car1.getName()) // 벤츠1
+```

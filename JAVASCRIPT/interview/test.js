@@ -1,11 +1,8 @@
-const x = 1;
-function outerFunc () {
-    const x = 10;
-    innterFunc()
-}
-function innterFunc () {
-    console.log(x); // 1
-    console.log(this)
+function Car (name) {
+    this.name = name
 }
 
-outerFunc()
+Car.prototype.getName = () => this.name + 1
+
+const car1 = new Car('벤츠');
+console.log(car1.getName()) // 벤츠1
