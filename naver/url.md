@@ -1,833 +1,111 @@
-## main contents - section
-이제 메인 컨테츠 스타일 작성을 진행할텐데 일단 그전에 메인컨테츠영역또한 두개로 나눌수 있다. 바로 `section` 과 `aside` 태그로 나누었는데 이 두 큰 영역은 `.contents_area` 라는 클래스이름을 가진 박스영역에 묶여있다. 
+html 마크업 코드를 보면서 조금 불편하다 라는 생각 들지 않나요? 그냥 메인페이지 하나 만드는데 컨텐츠에 따라서 한페이지의 라인수가 엄청 길어집니다. 라인수가 길어지면 가독성이 떨어지고 유지보수할때도 시간을 많이 잡아먹는 원인이 됩니다. 
+
+자바스크립트를 사용한다면 html 에서의 라인수를 줄이고 대체할 수 있습니다.
+
+## menu
+네이버 메뉴의 공통점을 보면 `li` 태그로 이루어져있고 내부에 `a` 태그로 링크가 걸려있습니다. 즉 텍스트만 다를뿐 동일한 태그를 사용하여 나열되어있습니다. 이 메뉴 부분은 js 로 처리하고 html 에서는 제거하도록 하겠습니다.
+
+
+### 초기 데이터 지정
+```js
+const fixMenu = ['메일', '카페', '블로그', '지식인', '쇼핑', 'TV']
+const favoritMenu = ['사전', '뉴스', '증권', '부동산', '지도', '웹툰']
+```
+
+우선 메뉴의 텍스트데이터를 담은 배열을 하나씩 만들어 줍니다. 메뉴의 색상에 따라 두가지로 리스트를 따로 두었기 때문에 배열또한 두가지로 나누어 `const` 라는 식별자를 사용하여 변수를 선언하고 초기화를하여 초기값 데이터를 지정해 주었습니다.
+
+### js 적용
+```html
+<head>
+    <script src="./js/main.js"></script>
+</head>
+```
+`head` 태그 내부에 스크립트 파일을 불러옵니다. html 은 브라우저엔진에 의해서 파싱되고 돔트리로 구성되고 렌더링 되면서 위에서부터 아래로 트리노드구조형태를 읽어옵니다. 그리고 스크립트태그를 만나게되면 html 의 렌더링 과정을 모두 중단하고 스크립트에 모든 동작을 넘깁니다.
   
-어떤 영역을 정렬하거나 기준을삼고싶으면 그 영역 전체를 하나의 박스로 묶어서 작성해주면된다. 
-  
-각 영역의 넓이는 `section : 750px, aside: 350px` 로 나뉘어져있기에 고정 사이즈를 갖고 영역을 잡으려고한다. 
+그러나 우리는 js 로 돔을 조작할것이기때문에 html 의 렌더링 과정이 끝난 다음에 js 파일이 실행되어야 에러없이 정상적으로 돔을 컨트롤 할 수 있기때문에 이에대한 처리를 해주어야 합니다.
 
-```css
-.contents_area {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 1130px;
-    margin: 0 auto;
-}
-
-.contents_area .main_contents {
-    background: aquamarine;
-    width: 750px;
-}
-
-.contents_area .aside_area {
-    background: tan;
-    width: 350px;
+```js
+window.onload = function () {
+    // 여기서부터 코드 작성
 }
 ```
 
-우선 컨테츠영역 전체가 1130px 사이즈를 기준으로 가운데에 위치해있기때문에 가장 큰 영역을 먼저 잡아주고 각 영역별 색상을 주어서 어떻게 레이아웃이 잡혀있는지 볼수있도록 하였다.
-
-```css
-align-items: flex-start;
-```
-해당스타일 속성은 지금껏 `center` 로만 사용했는데 여기서는 좌우 가운데 정렬이 아니라 둘중에 다른 컨테츠영역이 높이가 더 길어지더라도 항상 상단에 컨테츠가 있어야하기때문에 `flex-start` 라는 속성을 주었다.
+따라서 위와같은 전역객체 window 가 갖고있는 onload 메소드를 사용하여 html 이 렌더링이 끝난다음에 스크립트 파일이 실행되도록 할 수 있습니다.
   
-```css
-justify-content: space-between;
-```
-은 자동으로 컨텐츠를 양 끝을 기준으로 동일간 간격을 갖도록 정렬시켜주기때문에 별도로 두 컨텐츠간에 간격을 주기위한 코드는 작성하지 않아도 된다.
+배열로 선언한 두 변수는 돔조작과 상관없이 데이터만 갖고있기때문에 함수내부에서 선언해주지 않아도 됩니다.
 
-### 뉴스스탠드 영역
-```css
+### DOM 조작
+이제 필요한설정은 갖춰졌고 어떻게 html 에 자바스크립트로 메뉴를 적용할 수 있는지 보겠습니다.  
+우선 필요한 내용을 글로 적어보겠습니다.  
+1. 배열 데이터를 가공하여 원하는 요소로 html 형태로 만든다.  
+2. html 로 만든 형태를 html 에 원하는 태그의 자식요소로 넣어준다.  
 
-.main_contents .news_stand {
-    background: red;
-}
+```js
+const fixMenu = ['메일', '카페', '블로그', '지식인', '쇼핑', 'TV']
+const favoritMenu = ['사전', '뉴스', '증권', '부동산', '지도', '웹툰']
 
-.main_contents .news_stand .news_slide_area {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    background: #eeeeee;
-    padding: 12px;
-    border: 1px solid #cccccc;
-    margin: 20px 0;
-}
-
-.news_slide_area .quick_news {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-}
-
-.news_slide_area .category ul {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-}
-
-.news_stand_list .title_area {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.news_stand_list .title_area p {
-    margin-right: auto;
-}
-
-.news_stand_list .title_area ul {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-}
-
-.news_stand_list .news_card_list ul {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.news_stand_list .news_card_list ul li {
-    width: 125px;
-    height: 65px;
-    border: 1px solid #cccccc;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+window.onload = function () {
+    fixMenu.map(text => {})
 }
 ```
 
-뉴스스탠드영역 스타일코드인데 양이 많아보일수 있는데 자세히보면 대부분이 정렬코드인걸 볼 수 있다. 기본적으로 html 엘리먼트가 블록요소로 작성되어있다면 뒤에서 아래로 나열되어있기때문에 좌우로 정렬을 하기위해서는 flex 속성이 매우 많이 여러곳에 사용된다.
+배열을 조작해야하는데 이때 사용하는게 배열메서드이다. 자바스크립트의 배열은 선언과 동시에 따로 설정해주지않아도 프로토타입으로 상속받은 여러가지 메서드들을 사용할 수 있다. 그중 자주 사용하게되는 `map` 메소드를 배열데이터를 가공하기위해 사용한다.
   
-여기서 추가로 주목해야할 부분은 
-```css
-flex-wrap: wrap;
-```
-
-이 부분이다. flex 를 사용해서 좌우로 정렬하게되면 자동으로 컨테츠가 추가될때 넓이값이 갯수에 비례하여 줄어들어 한줄에 컨테츠가 나열되는데 각 컨텐츠에 넓이값을 지정해주고 위의 속성값을 넣어주면 부모 넓이의 영역을 벗어나는 컨텐츠에 대해서는 자동으로 줄바꿈되어 나열된다.
+map 메서드의 특징은 콜백함수를 가지며 원본배열을 훼손하지않고 새로운 배열을 리턴하는 특징이 있다. 즉 콜백함수 내에서 어떤 로직을 작성하면 해당 로직을 수행한 결과데이터를 또다른 하나의 배열로 만들어 리턴해준다.
   
-그렇게 사용해서 만들어진 영역이 뉴스네이밍이 적힌 카드의 정렬 방식이다.
-
-### 오늘 읽을만한 글
-
-```css
-
-.today_article {
-    margin: 20px 0;
-}
-
-.today_article .title_area {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.today_article .title_area div {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-.today_article .category_tab  {
-    margin-bottom: 20px;
-}
-
-.today_article .category_tab ul {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-}
-
-.today_article .category_tab ul li {
-    width: 94px;
-    height: 45px;
-    border: 1px solid #cccccc;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.main_articles {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.main_articles .select_article {
-    width: 364px;
-}
-
-.main_articles .card_area {
-    width: 364px;
-}
-
-.main_articles .card_area .card {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.main_articles .card_area .card img {
-    margin-right: 20px;
-}
-
-```
-
-전체 레이아웃은 위에서 잡던방식와 다르지않기에 부가적인 설명은 하지않도록 하겠다. 이제부턴 혼자 직접 작성해보고 직접 작성한것과 샘프롤 제공한 코드가 어떤 차이가 있는지 확인하면서 코드가 다르더라도 제대로 화면구성이 되었다면 제대로 레이아웃을 이해하고 작성했다고 볼 수 있다.
+위의 코드는 `fixMenu` 를 map 메서드로 순회하면서 text 라는 이름으로 지정한 변수에 0번째 인덱스값부터 순차적으로 담는 역할을 한다.
   
-이어서 나머지 영역도 스타일을 작성하기전에 리팩토링을 한번 거치려고한다.
-  
-지금 전체적으로 계속 반복적으로 사용되는 속성이 있는데 바로 flex 이다 이것때문에 라인수가 계속 증가하고 약간 가독성도 떨어지는것같다. 그래서 상단에 선택자를 나열해서 한번에 동일한 속성을 적용하는 방법을 사용하려고한다.
-
-```css
-
-/* 동일한 속성 사용 선택자 나열 */
-.util_menu ul,
-.logo_area,
-.gnb_area,
-.gnb_area_inner,
-.gnb_area ul,
-.weather_info_area,
-.contents_area,
-.news_slide_area,
-.quick_news,
-.category ul,
-.title_area,
-.title_area ul,
-.news_card_list ul,
-.news_card_list ul li,
-.today_article .title_area div,
-.category_tab ul,
-.category_tab ul li,
-.main_articles,
-.card_area .card {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+```js
+window.onload = function () {
+    fixMenu.map(text => {
+        return `<li><a href="#">${text}</a></li>`
+    })
 }
 ```
 
-이렇게 중복되는 코드를 빼왔는데 `align-items` 나 `justify-content` 를 같이 빼지 않은 이유는 세부레이아웃은 조금씩 다르기때문에 공통으로 쓰이는 것들만 따로 뺴내었고 선택자도 필요한 부분만 갖고왔고 만약 중복되는 클래스네임이 있다면 부모를 명시하도록 하였다.
-  
-> 이부분은 scss 같은 문법과 컴파일 도구를 활용하면 변수나 함수로 만들어 사용할 수 있다.
+화살표함수를 콜백함수로 넘겨서 새로운 배열을 생성해주려면 중괄호를 사용할경우 return 이라는 식별자를 명시해 주어야 한다. 만약 return 을 사용하지않을거라면 아래와같이 중괄호를 생략하고 사용하면된다.
 
-
-## 중복 스타일 리팩토링한 전체 코드
-
-```css
-/* 초기화 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-}
-
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-#wrap {
-    width: 100%;
-}
-
-/* 동일한 속성 사용 선택자 나열 */
-.util_menu ul,
-.logo_area,
-.gnb_area,
-.gnb_area_inner,
-.gnb_area ul,
-.weather_info_area,
-.contents_area,
-.news_slide_area,
-.quick_news,
-.category ul,
-.title_area,
-.title_area ul,
-.news_card_list ul,
-.news_card_list ul li,
-.today_article .title_area div,
-.category_tab ul,
-.category_tab ul li,
-.main_articles,
-.card_area .card {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-
-.header_area {
-    /* background: red; */
-    width: 1130px;
-    margin: 0 auto;
-}
-
-.header_area .util_menu {
-    /* background: yellow; */
-    margin: 10px 0;
-    margin-bottom: 30px;
-}
-
-.header_area .util_menu ul {
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.header_area .util_menu ul li {
-    margin-left: 10px;
-    font-size: 13px;
-}
-
-
-.header_area .logo_area {
-    align-items: center;
-    justify-content: center;
-}
-
-.header_area .logo_area .logo {
-    margin-right: 30px;
-}
-
-.header_area .logo_area input[type="text"] {
-    width: 400px;
-    height: 56px;
-    padding: 10px;
-    font-size: 20px;
-    border: 3px solid green;
-}
-
-
-.gnb_area {
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    height: 52px;
-    margin-top: 50px;
-    margin-bottom: 20px;
-}
-
-.gnb_area_inner {
-    align-items: center;
-    width: 1130px;
-    height: 100%;
-}
-
-.gnb_area ul {
-    align-items: center;
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.gnb_area .fix_menu li a {
-    color: green;
-}
-
-.gnb_area .favorit_menu li a {
-    color: black;
-}
-
-.gnb_area ul li {
-    margin-right: 10px;
-}
-
-.gnb_area .weather_info_area {
-    align-items: center;
-    justify-content: space-between;
-    margin-left: auto;
-    width: 150px;
-}
-
-
-.contents_area {
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 1130px;
-    margin: 0 auto;
-}
-
-.contents_area .main_contents {
-    /* background: aquamarine; */
-    width: 750px;
-}
-
-.main_contents .news_stand {
-    /* background: red; */
-}
-
-.main_contents .news_stand .news_slide_area {
-    align-items: center;
-    background: #eeeeee;
-    padding: 12px;
-    border: 1px solid #cccccc;
-    margin: 20px 0;
-}
-
-.news_slide_area .quick_news {
-    align-items: center;
-    margin-right: auto;
-}
-
-.news_slide_area .category ul {
-    align-items: center;
-}
-
-.news_stand_list .title_area {
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.news_stand_list .title_area p {
-    margin-right: auto;
-}
-
-.news_stand_list .title_area ul {
-    align-items: center;
-}
-
-.news_stand_list .news_card_list ul {
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.news_stand_list .news_card_list ul li {
-    width: 125px;
-    height: 65px;
-    border: 1px solid #cccccc;
-    align-items: center;
-    justify-content: center;
-}
-
-.today_article {
-    margin: 20px 0;
-}
-
-.today_article .title_area {
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.today_article .title_area div {
-    align-items: center;
-    margin-left: auto;
-}
-
-.today_article .category_tab  {
-    margin-bottom: 20px;
-}
-
-.today_article .category_tab ul {
-    align-items: center;
-}
-
-.today_article .category_tab ul li {
-    width: 94px;
-    height: 45px;
-    border: 1px solid #cccccc;
-    align-items: center;
-    justify-content: center;
-}
-
-.main_articles {
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.main_articles .select_article {
-    width: 364px;
-}
-
-.main_articles .card_area {
-    width: 364px;
-}
-
-.main_articles .card_area .card {
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.main_articles .card_area .card img {
-    margin-right: 20px;
-}
-
-
-.contents_area .aside_area {
-    background: tan;
-    width: 350px;
+```js
+window.onload = function () {
+    const fixLists = fixMenu.map(text => `<li><a href="#">${text}</a></li>`);
+    console.log(fixLists)
 }
 ```
 
+또다른 변수를 하나 선언하고 map 메서드를통해 새로 생성된 배열데이터를 할당해준다. 이때 html 형태처럼 만들기위해 사용한것은 일반적인 따옴표가 아니라 `백틱` 이라고 부른다. 백틱을 사용하게되면 저렇게 html 처럼 생긴 스트링을 작성하면서 그 내부에 `${}` 를 사용하여 자바스크립트 코드를 사용할 수 있다.
+  
+배열데이터는 두개였기에 같은 방식으로 가공한 데이터를 하나 더 만들어 준다.
 
-## 스타일 작성하면서 추가된 클래스명 포함한 전체 HTML
+```js
+window.onload = function () {
+    const fixLists = fixMenu.map(text =>`<li><a href="#">${text}</a></li>`).join('')
+    const favoritLists = favoritMenu.map(text => `<li><a href="#">${text}</a></li>`).join('')
+}
+```
+
+여기서 `join` 또한 배열에서 사용할 수 있는 메서드중 하나인데 map 메서드로 리턴한 값이 배열이기때문에 바로 체이닝을 통해 또다른 배열 메서드 사용이 가능하다.
+  
+조인이 없다면 배열자체가 스트링형태로 html 에 노출되기때문에 배열에 있는 쉼표까지도 화면에 보이게 된다. 조인은 배열을 순회하면서 하나의 스트링데이터로 만들어줘 쉼표가 사라지게된다.
+
+### innerHTML
+이제 html 에 ul 에 가공한 데이터를 넣으려고한다.
+
+```js
+const fixUl = document.querySelector('.fix_menu');
+const favorittUl = document.querySelector('.favorit_menu');
+const fixLists = fixMenu.map(text =>`<li><a href="#">${text}</a></li>`).join('')
+const favoritLists = favoritMenu.map(text => `<li><a href="#">${text}</a></li>`).join('')
+fixUl.innerHTML = fixLists
+favorittUl.innerHTML = favoritLists
+```
+
+`querySelector` 는 자바스크립트에서 css 에서 사용하던 선택자처럼 동일하게 선택자를 사용할 수 있도록 해준다. 이 전에는 getElementById, getElementByTagName 등 태그나 속성에 따라 서로 다른 메서드를 사용해야만 했다.
+  
+이제 데이터를 가공했고 이 가공한 데이터를 어디에 넣을지 요소까지 갖고왔다. 마지막으로 이 가공한 데이터를 해당 요소에 넣어주기만하면되는데 이때 사용하는 객체가 `innerHTML` 이다. 말 그대로 내부에 html 을 넣어주는 객체다.
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>네이버</title>
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-    <div id="wrap">
-        <header class="header_area">
-            <div class="util_menu">
-                <ul>
-                    <li><a href="#">네이버를 시작페이지로</a></li>
-                    <li><a href="#">쥬니어네이버</a></li>
-                    <li><a href="#">해피빈</a></li>
-                </ul>
-            </div>
-            <div class="logo_area">
-                <h1 class="logo">네이버로고</h1>
-                <input type="text" />
-                <img src="https://via.placeholder.com/56x56.png?text=search" alt="검색 아이콘" />
-            </div>
-        </header>
-        <nav class="gnb_area">
-            <div class="gnb_area_inner">
-                <ul class="fix_menu">
-                    <li><a href="#">메일</a></li>
-                    <li><a href="#">카페</a></li>
-                    <li><a href="#">블로그</a></li>
-                    <li><a href="#">지식인</a></li>
-                    <li><a href="#">쇼핑</a></li>
-                    <li><a href="#">TV</a></li>
-                </ul>
-                <ul class="favorit_menu">
-                    <li><a href="#">사전</a></li>
-                    <li><a href="#">뉴스</a></li>
-                    <li><a href="#">증권</a></li>
-                    <li><a href="#">부동산</a></li>
-                    <li><a href="#">지도</a></li>
-                    <li><a href="#">웹툰</a></li>
-                </ul>
-                <div class="weather_info_area">
-                    <p>미세</p>
-                    <p>👨‍🦲</p>
-                    <p>보통</p>
-                    <p>관산동</p>
-                </div>
-            </div>
-        </nav>
-        <div class="contents_area">
-            <section class="main_contents">
-                <section class="ad_area">
-                        <img src="https://via.placeholder.com/750x135.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="메인광고배너">
-                </section>
-                <section class="news_stand">
-                    <div class="news_slide_area">
-                        <div class="quick_news">
-                            <p>연합뉴스</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        </div>
-                        <div class="category">
-                            <ul>
-                                <li><a href="#">네이버뉴스</a></li>
-                                <li><a href="#">연예</a></li>
-                                <li><a href="#">스포츠</a></li>
-                                <li><a href="#">경제</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="news_stand_list">
-                        <div class="title_area">
-                            <p>뉴스스탠드 > 구독한 언론사 전체언론사</p>
-                            <ul>
-                                <li><button>icon1</button></li>
-                                <li><button>icon2</button></li>
-                                <li><button>icon3</button></li>
-                            </ul>
-                        </div>
-                        <div class="news_card_list">
-                            <ul>
-                                <li><a href="#">시사인</a></li>
-                                <li><a href="#">YTN</a></li>
-                                <li><a href="#">매일경제</a></li>
-                                <li><a href="#">이투데이</a></li>
-                                <li><a href="#">아시아경제</a></li>
-                                <li><a href="#">문화일보</a></li>
-                                <li><a href="#">시사인</a></li>
-                                <li><a href="#">YTN</a></li>
-                                <li><a href="#">매일경제</a></li>
-                                <li><a href="#">이투데이</a></li>
-                                <li><a href="#">아시아경제</a></li>
-                                <li><a href="#">문화일보</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                <section class="today_article">
-                    <div class="title_area">
-                        <p>오늘 읽을만한 글</p>
-                        <p>주제별로 분류된 다양한 글 모음</p>
-                        <div>
-                            <p>1,839 개의 글</p>
-                            <p>관심주제 설정</p>
-                        </div>
-                    </div>
-                    <div class="category_tab">
-                        <ul>
-                            <li><a href="#">엔터</a></li>
-                            <li><a href="#">스포츠</a></li>
-                            <li><a href="#">자동차</a></li>
-                            <li><a href="#">웹툰</a></li>
-                            <li><a href="#">경제</a></li>
-                            <li><a href="#">레시피</a></li>
-                            <li><a href="#">게임</a></li>
-                            <li><a href="#">게임</a></li>
-                        </ul>
-                    </div>
-                    <div class="main_articles">
-                        <div class="select_article">
-                            <img src="https://via.placeholder.com/364x180.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="카드 이미지">
-                            <p>자동차 소식</p>
-                            <p>MY CAR에서 내 차 관리하고</p>
-                            <p>중고차 1,000만원 할인권 GET!</p>
-                        </div>
-                        <div class="card_area">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/98x98.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                <div>
-                                    <p>자동차 트렌드</p>
-                                    <p>고성능 4도어 전기차</p>
-                                    <p>모터매거진</p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://via.placeholder.com/98x98.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                <div>
-                                    <p>자동차 트렌드</p>
-                                    <p>고성능 4도어 전기차</p>
-                                    <p>모터매거진</p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://via.placeholder.com/98x98.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                <div>
-                                    <p>자동차 트렌드</p>
-                                    <p>고성능 4도어 전기차</p>
-                                    <p>모터매거진</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="category_contents_list">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/170x114.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                            <div>
-                                <p>자동차</p>
-                                <p>고성능 4도어 전기차</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste veritatis facere laboriosam pariatur atque officia adipisci ipsa vero officiis qui inventore, minima illum ipsam autem! Vero velit quisquam maiores quasi.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="https://via.placeholder.com/170x114.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                            <div>
-                                <p>자동차</p>
-                                <p>고성능 4도어 전기차</p>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste veritatis facere laboriosam pariatur atque officia adipisci ipsa vero officiis qui inventore, minima illum ipsam autem! Vero velit quisquam maiores quasi.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </section>
-            <aside class="aside_area">
-                <div class="login_area">
-                    <p>네이버를 더 안전하고 편리하게 이용하세요</p>
-                    <button>NAVER 로그인</button>
-                    <div>
-                        <p>아이디</p>
-                        <p>비밀번호찾기</p>
-                        <p>회원가입</p>
-                    </div>
-                </div>
-                <div class="economy"></div>
-                <div class="aside_baner">
-                    <img src="https://via.placeholder.com/350x200.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                </div>
-                <div class="shopping_area">
-                    <div class="title_group">
-                        <p>트렌드쇼핑 ></p>
-                        <div class="shop_tab">
-                            <ul>
-                                <li><a href="#">상품</a></li>
-                                <li><a href="#">쇼핑몰</a></li>
-                                <li><a href="#">MEN</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shop_group">
-                        <ul>
-                            <li>지마켁</li>
-                            <li>옥션</li>
-                            <li>11번가</li>
-                            <li>이마트몰</li>
-                            <li>티몬</li>
-                            <li>위메프</li>
-                            <li>쿠팡</li>
-                            <li>신세계몰</li>
-                            <li>올리브영</li>
-                            <li>롯데몰</li>
-                        </ul>
-                        <div class="item_area">
-                            <ul>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <img src="https://via.placeholder.com/107x146.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                                        <p>반짝반짝 빛나니</p>
-                                        <p>너무나 좋아해~</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-        <footer class="footer_area">
-            <div class="footer_banner">
-                <div>
-                    <img src="https://via.placeholder.com/160x86.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                    <div>
-                        <p>D2SF 스타트업</p>
-                        <p>카페창업, 얼마나 남을까?</p>
-                        <p>지금 바로 확인하세요</p>
-                    </div>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/160x86.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                    <div>
-                        <p>D2SF 스타트업</p>
-                        <p>카페창업, 얼마나 남을까?</p>
-                        <p>지금 바로 확인하세요</p>
-                    </div>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/160x86.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide" alt="">
-                    <div>
-                        <p>D2SF 스타트업</p>
-                        <p>카페창업, 얼마나 남을까?</p>
-                        <p>지금 바로 확인하세요</p>
-                    </div>
-                </div>
-            </div>
-            <div></div>
-            <div>
-                <div>
-                    <dl>
-                        <dt>Creators</dt>
-                        <dd>크리에이터</dd>
-                        <dd>스몰비즈니스</dd>
-                    </dl>
-                    <dl>
-                        <dt>Partners</dt>
-                        <dd>비즈니스 광고</dd>
-                        <dd>스토어개설</dd>
-                        <dd>지역업체 등록</dd>
-                    </dl>
-                    <dl>
-                        <dt>Developers</dt>
-                        <dd>네이버 개발자 센터</dd>
-                        <dd>오픈 API</dd>
-                        <dd>오픈소스</dd>
-                    </dl>
-                </div>
-                <div>
-                    <div>웨일 브라우저</div>
-                    <div>프로젝트 꽃</div>
-                </div>
-            </div>
-            <div class="footer_menu">
-                <ul>
-                    <li><a href="#">회사소개</a></li>
-                    <li><a href="#">인재채용</a></li>
-                    <li><a href="#">제휴제안</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">청소년보호정책</a></li>
-                    <li><a href="#">네이버정책</a></li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+<ul class="fix_menu"></ul>
+<ul class="favorit_menu"></ul>
 ```
+
+이제 메뉴의 li 를 제거하더라도 화면에 정상적으로 메뉴가 보이는것을 확인 할 수 있다.
