@@ -1,25 +1,3 @@
-// const arr = ['사과', '배', '포도', '딸기', '청포도'];
-// console.log(arr)
-// function setArr(index, value) {
-//     const length = arr.length
-//     const temp = arr.splice(index, arr.length)
-//     arr[index] = 0;
-//     for(let i = 0; i < length - index; i++) {
-//         arr[(i + 1) + index] = temp[i]
-//     }
-//     arr[index] = value
-// }
-
-// function deleteArr(index) {
-//     console.log(arr[index])
-// }
-
-// setArr(3, '복숭아')
-// setArr(1, '체리')
-// console.log(arr)
-
-// deleteArr(1)
-
 const arr = [];
 
 Object.prototype.add = function (index, value) {
