@@ -43,7 +43,7 @@ class LinkedList {
         }
     }
 
-    node(index) {
+    findNode(index) {
         let x = this.head
         for (let i = 0; i < index; i++) {
             x = x.next
@@ -57,7 +57,7 @@ class LinkedList {
         } else {
             // 값이 삽입될 노드의 이전 노드를 알고 있어야한다.
             // 이전 노드를 알고있다면 삽입될 노드의 다음 노드로 연결할 next 노드의 데이터도 알 수 있다.
-            let temp1 = this.node(index - 1);
+            let temp1 = this.findNode(index - 1);
             let temp2 = temp1.next;
             let newNode = new Node(value);
             temp1.next = newNode
@@ -75,11 +75,20 @@ class LinkedList {
             return "[]";
         }
         let temp = this.head;
-        while(temp.next) {
+        for (let i = 0; i < this._size; i++) {
             result.push(temp.data)
             temp = temp.next
         }
         return result
+    }
+
+    removeFirst() {
+        let temp = this.head
+        this.head = this.head.next;
+        let returnData = temp.data;
+        temp = null;
+        this._size -= 1;
+        return returnData;
     }
 }
 
@@ -88,11 +97,18 @@ class LinkedList {
 
 const node = new LinkedList();
 
-node.addFirst(30);
-node.addFirst(20);
 node.addFirst(10);
+node.addFirst(20);
 
-node.add(1, 15);
-node.add(4, 20);
-console.log(node.toString());
+// console.log(node)
+
+// node.addFirst(30);
+// node.addFirst(20);
+// node.addFirst(10);
+
+// node.add(1, 15);
+// node.add(4, 20);
+// node.addLast(2);
+// console.log(node.removeFirst());
+// console.log(node.toString());
 

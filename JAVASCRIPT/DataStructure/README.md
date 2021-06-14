@@ -92,6 +92,150 @@ console.log(arr.get(1)) // 포도
   
 우선 단방향 연결리스트부터 자바스크립트 코드로 구현해보도록 하겠다.
 
+### addFirst
+`addFirst` 는 연결리스트의 가장 맨 첫번째값으로 추가하는 기능을 갖습니다. 
+```js
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+```
+배열을 구현해볼때는 `prototype` 의 상속을 활용했었는데 연결리스트는 객체로 구성되어있어야하기때문에 자바스크립트에 추가된 클래스 문법을 활용하려고 합니다. 
+  
+먼저 노드객체를 만들어줘야하기때문에 위와같은 노드클래스를 정의해주었습니다. 해당 노드객체는 data 와 next 의 정보를 갖는 객체로 생성됩니다.
+```js
+console.log(new Node(1)) // {data: 1, next: null}
+```
+
+```js
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this._size = 0;
+    }
+}
+```
+그리고 또 하나의 클래스가 필요한데 여기에 연결리스트에 필요한 다양한 메서드들을 정의하려고합니다. 연결리스트에서는 처음에도 설명했던것처럼 가장 첫번째값(head), 가장 마지막값(tail) 이 있어야하고 해당 연결리스트가 갖고있는 값을 저장할  `_size` 도 초기화 해주었습니다.
+
+```js
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this._size = 0;
+    }
+
+     addFirst(value) {
+        let newNode = new Node(value) // 새로운 노드 객체 생성
+        newNode.next = this.head; // 노드객체의 next 에 head 를 지정
+        this.head = newNode // head 에는 새로 생성된 노드객체 지정
+        this._size += 1 // 연결리스트의 사이즈 증가
+        if (!this.head.next) { // 다음 노드가 없다면
+            this.tail = this.head // 다음 노드가 없다는건 head 가 곧 tail
+        }
+    }
+}
+
+const numbers = new LinkedList();
+numbers.addFirst(10); // Node { data: 10, next: null }
+```
+
+위와같이 새로운값이 들어오면 새로운 노드객체를 생성해주고 기존의 head 객체는 추가된 객체에 우선순위가 밀러라니때문에 next 에 지정해주고 head 는 새로 생성된 객체를 가르키게된다. 이때 만약 head 에 next 가 지정되어있지않다면 첫번째값이 곧 꼬리값이나 마찬가지이다.
+
+
+### addLast
+```js
+addLast(value) {
+    let newNode = new Node(value);
+    if(this._size === 0) {
+        this.addFirst(value)
+    } else {
+        this.tail.next = newNode;
+        this.tail = newNode;
+        this._size += 1;
+    }
+}
+```
+이번엔 가장 마지막에 노드를 추가하는 메서드를 작성한다. 값을 전달받아 새로운 노드객체를 생성하고 이때 만약 `size` 가 0이라면 해당 값이 가장 처음값이기때문에 이땐 이미 만들어둔 `addFirst()` 메서드를 실행시킨다. 값이 존재한다면 해당값은 꼬리값으로 지정되야하므로 현재 꼬리의 next 에 객체를 추가해준다.
+  
+그리고 꼬리에 생성된 객체를 저장하고 전체사이즈를 1 증가시켜준다.
+  
+
+### 특정위치의 노드를 찾는 메서드 findNode
+```js
+findNode(index) {
+    let x = this.head
+    for (let i = 0; i < index; i++) {
+        x = x.next
+    }
+    return x
+}
+```
+배열은 순서가 보장된 데이터 목록이기때문에 `index` 를 통해서 타겟에 접근할 수 있었습니다. 그러나 연결리스트는 다음값을 알기위해서는 이전값을 알아야하고 그렇게 타고 올라가다보면 결국 `head` 를 알아야 다음값을 알 수 있습니다. 그래서 `head` 를 변수에 저장하고 넘겨받은 `index` 만큼 반복문을 돌면서 `next` 를 통해서 다음객체 그리고 다음객체 그리고 타겟이 된 객체가 나올때까지 반복문을돌고 찾으려는 객체를 리턴해주는 메서드입니다.
+
+### add
+찾으려는 타겟의 객체를 구하는 메서드를 먼저 작성한 이유는 이 add 메서드에서 사용되어야하기때문이다.  
+```js
+    add(index, value) {
+        if (index === 0) {
+            this.addFirst(value);
+        } else {
+            // 값이 삽입될 노드의 이전 노드를 알고 있어야한다.
+            // 이전 노드를 알고있다면 삽입될 노드의 다음 노드로 연결할 next 노드의 데이터도 알 수 있다.
+            let prev = this.findNode(index - 1);
+            let next = prev.next;
+            let newNode = new Node(value);
+            prev.next = newNode
+            newNode.next = next;
+            this._size += 1
+            if (newNode.next === null) {
+                this.tail = newNode
+            }
+        }
+    }
+```
+add 에서는 두가지 인자가 필요합니다. 몇번째에 값을 넣을건지와 어떤 객체를 추가할것인지 이때 index 가 0 이라면 가장 첫번째에 값을 추가하는것이기때문에 `addFirst` 를 활용합니다. 만약 index 가 1이라면 1이전의 값 즉 0번째에있는 값을 알아야합니다. 바로 이 이전값을 알아내기위해 미리 만들어둔 findNode 를 활용합니다. 
+ 
+임시 변수에 넣으려는 위치의 이전객체를 저장하고 이 추가된 값은 다음값또한 알고있어야 next 로 연결해줄 수 있기때문에 임시변수를 하나 더 만들어서 다음객체를 저장합니다. 이때 다음객체는 이전객체의 next 이기때문에 쉽게 구할 수 있습니다.
+  
+그리고 전달받은 값으로 새로운 객체를 생성하고 이전값의 next 에 새로 생성된 객체를 저장하고 새로 생성된 객체의 다음값으로는 그 다음객체를 저장해줍니다. 데이터가 추가되었기 때문에 size 를 늘려주고 만약 현재 객체의 next 로 저장한 값이 아무것도 없다면 추가된 해당 객체는 가장 마지막 값이기떄문에 tail 에 새로 생성된 객체를 추가하는 조건 코드를 작성해줍니다.
+
+### toString
+값을 추가하는 메서드들은 작성했지만 그래서 현재 노드의 값들이 몇개가있는지 어떤값들이 들어갔는지 알기 어렵습니다. 그래서 toString 이라는 메서드를 추가해서 현재 연결리스트의 데이터를 출력하려고합니다.
+```js
+toString() {
+    const result = [];
+    if (this.head === null) return result;
+    let temp = this.head;
+    for (let i = 0; i < this._size; i++) {
+        result.push(temp.data)
+        temp = temp.next
+    }
+    return result
+}
+```
+
+연결리스트에서는 어떤 값을 얻어내기위해서는 항상 head 부터 시작해야합니다. 그래서 임시변수에 head 의 객체를 저장하고 size 에 현재 노드객체의 갯수를 저장하고있기때문에 size 만큼 반복문을 돌면서 next 데이터를 다시 임시변수에 저장하고 빈 배열을 만들어서 여기에는 next 를 돌때마다 데이터를 추가해줍니다.
+
+### removeFirst
+```js
+removeFirst() {
+    let temp = this.head
+    this.head = this.head.next;
+    let returnData = temp.data;
+    temp = null;
+    this._size -= 1;
+    return returnData;
+}
+```
+값을 제거하는 메서드를 만들건데 가장 첫번째 노드만 제거하는 메서드입니다. 임시변수에 head 객체를 저장하고 head 객체에는 head 의 next 객체를 저장해줍니다. 그리고 제거한 데이터를 리턴해주기위해 returnData 에 임시변수에 저장했던 head 의 값을 넣어주고 임시변수는 null 을 할당합니다. 
+  
+size를 1줄여주고 제거한 데이터를 리턴합니다.
+
+
 
 
 ## 형태에 따라
