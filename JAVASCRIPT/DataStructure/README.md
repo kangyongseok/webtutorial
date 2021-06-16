@@ -243,6 +243,121 @@ size를 1줄여주고 제거한 데이터를 리턴합니다.
   
 가장 먼 데이터를 찾게되더라도 최대 2/n 만큼의 반복만 실행하면되기때문에 단방향보다는 데이터 검색에 있어서 효율적이다. 다만 이전객체에대한 정보도 갖고있어야하기에 메모리의 사용량이 좀더 늘어나게된다.
 
+### addFirst
+이중연결리스트는 단방향 연결리스트의 연장선이기때문에 동일한 메서드를 재사용합니다.
+```js
+addFirst(value) {
+    let newNode = new Node(value)
+    newNode.next = this.head;
+    if (this.head !== null) this.head.prev = newNode // 추가
+    this.head = newNode
+    this._size += 1
+    if (!this.head.next) {
+        this.tail = this.head
+    }
+}
+```
+
+조건문이 하나가 추가되었는데 만약 head 가 현재 아무값도 없다면 이전값으로 지정할 객체가 없기때문에 head 가 있을때에만 head 의 prev 에 새로운 노드객체가 추가될 수 있도록 합니다.
+
+### addLast
+```js
+addLast(value) {
+    let newNode = new Node(value);
+    if(this._size === 0) {
+        this.addFirst(value)
+    } else {
+        this.tail.next = newNode;
+        newNode.prev = this.tail; // 추가
+        this.tail = newNode;
+        this._size += 1;
+    }
+}
+```
+
+새로 생된 노드객체가 가장 마지막 노드가 될것이므로 새 노드객체의 이전노드로 기존의 tail객체를 저장하는 코드를 추가합니다.
+
+### findNode
+```js
+findNode(index) {
+    let half = this._size / 2 // 추가
+    if (index < half) { // 추가
+        let x = this.head
+        for (let i = 0; i < index; i++) {
+            x = x.next
+        }
+        return x
+    } else {
+        // 추가
+        let x = this.tail
+        for (let i = this._size - 1; i > index; i--) {
+            x = x.prev;
+        }
+        return x
+    }
+}
+```
+
+이제 노드를 찾을때에는 head 또는 tail 과 더 가까운 위치부터 찾아 나가야하기때문에 해당 리스트의 절반을 구하고 index가 절반보다 작다면 head 부터 시작, index 가 절반보다 크다면 tail 부터 시작하는 코드를 작성합니다.
+
+### add
+```js
+add(index, value) {
+    if (index === 0) {
+        this.addFirst(value);
+    } else {
+        let temp1 = this.findNode(index - 1);
+        let temp2 = temp1.next;
+        let newNode = new Node(value);
+        temp1.next = newNode
+        newNode.next = temp2;
+        if (temp2 !== null) temp2.prev = newNode // 추기
+        newNode.prev = temp1 // 추가
+        this._size += 1
+        if (newNode.next === null) {
+            this.tail = newNode
+        }
+    }
+}
+```
+
+temp1 에는 찾으려는 값의 이전노드객체를 저장하고있고 temp2 는 현재 index 에 있는 노드객체를 저장하고있습니다.  
+새로운 노드객체가 생성되면 temp2 가 그 자리를 지키고있다가 앞자리를 내주는것이기때문에 temp2.prev 에 새로운 노드객체를 지정해줍니다.
+  
+새로운 노드객체는 temp1을 이전 노드객체로 갖게됩니다.
+
+### removeFirst
+```js
+removeFirst() {
+    let temp = this.head
+    this.head = this.head.next;
+    let returnData = temp.data;
+    temp = null;
+    if (this.head !== null) this.head.prev = null // 추가
+    this._size -= 1;
+    return returnData;
+}
+```
+
+기존의 제거 메서드에서 다른 객체는 다 정리되었고 이전객체와 연결되어있던 데이터와의 연결을 끊어줘야합니다.
+
+### remove
+```js
+remove(index) {
+    if (index === 0) return this.removeFirst();
+    let temp = this.findNode(index - 1);
+    let todoDeleted = temp.next;
+    temp.next = temp.next.nex;
+    if (temp.next !== null) temp.next.prev = temp
+    let returnData = todoDeleted.data;
+    if (todoDeleted === this.tail) this.tail = temp;
+    todoDeleted = null;
+    this._size -= 1
+    return returnData
+}
+```
+
+
 
 
 ## 원형 연결리스트
